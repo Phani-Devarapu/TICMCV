@@ -1,7 +1,4 @@
-package com.mcit.cvbuilder.models;
-
-import java.util.ArrayList;
-import java.util.Collection;
+package com.mcit.models;
 
 import javax.persistence.*;
 

@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.mcit.cvbuilder.models.MyUserDetails;
-import com.mcit.cvbuilder.models.User;
+import com.mcit.models.MyUserDetails;
+import com.mcit.models.User;
 import com.mcit.resumebuilder.dto.UserRegistrationDto;
 
 @Service

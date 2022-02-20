@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mcit.cvbuilder.models.Education;
-import com.mcit.cvbuilder.models.Job;
-import com.mcit.cvbuilder.models.RegisterForm;
-import com.mcit.cvbuilder.models.User;
-import com.mcit.cvbuilder.models.UserProfile;
+import com.mcit.models.Education;
+import com.mcit.models.Job;
+import com.mcit.models.RegisterForm;
+import com.mcit.models.UserProfile;
 
 @Controller
 public class HomeController {
