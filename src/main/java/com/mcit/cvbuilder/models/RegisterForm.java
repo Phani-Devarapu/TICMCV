@@ -33,5 +33,12 @@ public class RegisterForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@Override
+	public String toString() {
+		return "RegisterForm [firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
+				+ ", password=" + password + "]";
+	}
+	
+	
 	
 }
