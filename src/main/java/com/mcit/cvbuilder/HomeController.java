@@ -1,6 +1,7 @@
 package com.mcit.cvbuilder;
 
 import java.security.Principal;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mcit.cvbuilder.models.Education;
 import com.mcit.cvbuilder.models.Job;
+import com.mcit.cvbuilder.models.RegisterForm;
+import com.mcit.cvbuilder.models.User;
 import com.mcit.cvbuilder.models.UserProfile;
 
 @Controller
@@ -21,11 +24,29 @@ public class HomeController {
 
     @Autowired
     UserProfileRepository userProfileRepository;
+    
 
     @GetMapping("/")
     public String home() {
         return "index";
     }
+	@GetMapping(path="/registerForm")
+	public String getRegisterForm(Model model,RegisterForm registerForm) {
+		
+		model.addAttribute("RegisterForm", new RegisterForm());
+		return "registration";
+	}
+	
+	@PostMapping(path="/registerForm")
+	public String submitRegistration(Model model,@ModelAttribute RegisterForm registerForm) {
+;
+		System.out.println(registerForm.toString());
+		
+       model.addAttribute("RegisterForm", new RegisterForm());
+		 //userProfileRepository.save(registerForm);
+		return "registration-success";
+		}
+	 
 
     @GetMapping("/edit")
     public String edit(Model model, Principal principal, @RequestParam(required = false) String add, Job job, @ModelAttribute UserProfile userprofilee) {
@@ -39,7 +60,7 @@ public class HomeController {
         		 
         		userProfile.getJobs().add(new Job());
         		
-        	}
+          	}
         	else {
         		userProfile.getJobs().add(job);
         		
