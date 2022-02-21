@@ -1,13 +1,10 @@
-package com.mcit.cvbuilder.models;
+package com.mcit.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table

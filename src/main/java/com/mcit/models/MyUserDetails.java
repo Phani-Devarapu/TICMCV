@@ -1,4 +1,4 @@
-package com.mcit.cvbuilder.models;
+package com.mcit.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

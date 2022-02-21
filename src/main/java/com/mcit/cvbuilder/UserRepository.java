@@ -2,7 +2,7 @@ package com.mcit.cvbuilder;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.mcit.cvbuilder.models.User;
+import com.mcit.models.User;
 
 import java.util.Optional;
 
