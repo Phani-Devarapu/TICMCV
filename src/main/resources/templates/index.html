@@ -3,94 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Resume portal</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    *{
-      margin:0;
-      padding:0;
-    }
-  /* body{
-	background-image:url('https://thumbs.dreamstime.com/b/resume-application-clipboard-curriculum-cv-abstract-circle-background-flat-color-icon-148477970.jpg');
-	background-size:800px 800px;
-	background-repeat:no-repeat;
- 	background-position:center; 
-} */
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
-
-.button1 {
-  background-color:rgb(245,169,239); 
-  color: black; 
- 
-}
-
-.button1:hover {
-  background-color: rgb(172, 94, 172);
-   color: white;
-}
-
-.button2 {
-  background-color: rgb(18,243,232); 
-  color: black; 
- 
-}
-
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-.buttonsContainer a{
-  display: inline;
-}
-.buttonsContainer a button{
-  width:200px;
-  margin: 10px;
-  border-radius: 10px;
-}
-.buttonsContainer{
-  position: absolute;
-top:50%;
-right:20%;
-}
-.mainContainer{
-  height:100vh;
-  background: rgb(2,0,36);
-  background-image: linear-gradient(90deg, rgb(18,243,232), rgb(245,169,239));
-
-  /* background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(61, 59, 182) 5%, rgba(0,212,255,1) 100%); */
-}
-.sideImg{
-  margin:30px;
-  opacity: 0.7;
-}
-.text{
-  /* color:white; */
-  font-size: 30px;
-  text-transform: uppercase;
-  text-align: right;
-  margin-bottom: 20px;
-
-}
-  </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@600;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="global.css"/>
 </head>
 <body>
+  <div>
+        <div class="header"><a href="#">Resume portal</a>
+          
+          <div class="headerButtons">
+            <button class="buttonClass buttonOne">Login</button>
+            <button class="buttonClass buttonTwo">Register</button>
+          </div>
+        
+        </div>
+        
+  </div> 
+
   <div class='mainContainer'>
-    <div style="  text-transform: uppercase;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;font-style:italic;text-align:center;font-size:60px;padding:10px">Resume portal</div>
-    <img class='sideImg' src='https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png' height='500px'/>
+    <img class='sideImg' src='./user.png' width='300px'/>
+    
     <div class='buttonsContainer'>
       <div class='text'>Build your Resume the Right Way</div>
       <a href="/edit"><button class="button button1">Login</button></a>
-      <a href="/registerForm"><button class="button button2">Register</button></a>
+      
+      <a href="/registerForm">
+        <button class="button button2">Register</button>
+      </a>
     </div>
 </div>
 
