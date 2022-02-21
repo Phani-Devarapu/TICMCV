@@ -1,6 +1,7 @@
 package com.mcit.cvbuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,15 @@ public class MyUserDetailsService implements UserDetailsService {
 		authorities.add(role1);
 		
 		String encodedPassword = passwordEncoder.encode(registrationDTO.getPassword());
+		System.out.println("The encoded password is " + encodedPassword);
 
-		User user = new User(registrationDTO.getUserName(),encodedPassword,registrationDTO.isEnabled(),registrationDTO.getRoles(),registrationDTO.getFirstName(),registrationDTO.getLastName(),registrationDTO.getEmail());
+		User user = new User(registrationDTO.getUserName(),
+				encodedPassword,
+				true,
+				"ROLE_USER",
+				registrationDTO.getFirstName(),
+				registrationDTO.getLastName(),
+				registrationDTO.getEmail());
 
 		return userRepository.save(user);
 
