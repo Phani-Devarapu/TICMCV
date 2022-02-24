@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Experience Edit</title>
+</head>
+<body>
+    <div class="card-body">
+              <h3 class="card-title">Experience</h3>
+              <table class="table table-striped" >
+              </thead>
+                <tbody>
+                  <form action="#" th:action="@{'/edit/experience?index=' + ${index}}" th:object="${job}" method="post">
+                    <tr >
+                      <td>Company</td>
+                      <td><input class="form-control" th:field="*{company}"></input></td>
+                    </tr>
+                    <tr >
+                      <td>Designation</td>
+                      <td><input class="form-control" th:field="*{designation}"></input></td>
+                    </tr>
+                    <tr >
+                      <td>Start Date</td>
+                      <td><input class="form-control" th:field="*{startDate}"></input></td>
+                    </tr>
+                    <tr >
+                      <td>End Date</td>
+                      <td><input class="form-control" th:field="*{endDate}"></input></td>
+                    </tr>
+                    <tr >
+                      <td>Current Job</td>
+                      <td><input type="checkbox" class="form-control" th:value="*{currentJob}"  style="width:40px"/></td>
+                      
+                    </tr>
+                    
+                  
+<!--                      <form action="#" th:action="@{/edit/experience}" th:object="${job}" method="post"> -->
+   <input class="btn btn-outline-success btn-block" type="submit" value="Update Job">
+ </form>
+                   
+                
+                  </div>
+                </tbody>
+                </table>
+                </div>
+</body>
+</html>

@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -68,10 +69,12 @@ public class PhaniController {
 			buttonClicks.setAddSkillClicked(true);
 		}
 		Validations validations = new Validations();
-		List<String> validateProfile = validations.validateProfile(this.modifiedUserProfile.get(principal.getName()));
+		Set<String> validateProfile = validations.validateProfile(this.modifiedUserProfile.get(principal.getName()));
+		validateProfile.addAll(validations.validateDates(this.modifiedUserProfile.get(principal.getName())));
 
 		model.addAttribute("userProfile", modifiedUserProfileTemp);
 		model.addAttribute("jobsList", modifiedUserProfileTemp.getJobs());
+		model.addAttribute("eduList", modifiedUserProfileTemp.getEducations());
 		model.addAttribute("skillsList", modifiedUserProfileTemp.getSkills());
 		model.addAttribute("pa", buttonClicks);
 		model.addAttribute("errors", validateProfile);
@@ -83,7 +86,8 @@ public class PhaniController {
 		model.addAttribute("userId", principal.getName());
 		// }
 
-		return "profile-edit-phani";
+		//return "profile-edit-phani";
+		return "prathaptest";
 	}
 
 	@PostMapping("/addJob")
@@ -167,7 +171,8 @@ public class PhaniController {
 	public String postEdit(Model model, Principal principal, @ModelAttribute UserProfile userProfile) {
 		String userName = principal.getName();
 		Validations validations = new Validations();
-		List<String> validateProfile = validations.validateProfile(this.modifiedUserProfile.get(principal.getName()));
+		Set<String> validateProfile = validations.validateProfile(this.modifiedUserProfile.get(principal.getName()));
+		validateProfile.addAll(validations.validateDates(this.modifiedUserProfile.get(principal.getName())));
 
 		if (validateProfile.size() > 0) {
 			return "redirect:/edit2";
@@ -215,7 +220,32 @@ public class PhaniController {
 		UserProfile userProfile = this.modifiedUserProfile.get(userId);
 		Job job = userProfile.getJobs().get(index);
 		model.addAttribute("job", job);
+		model.addAttribute("index", index);
 		return "experience-edit";
+
+	}
+
+	@PostMapping("/edit/experience")
+	public String editExperience(Model model, Principal principal, @ModelAttribute Job job, @RequestParam int index) {
+		System.out.println("The post experience is " + job.toString() + " " + index);
+		final String userId = principal.getName();
+		UserProfile userProfile = this.modifiedUserProfile.get(userId);
+		userProfile.getJobs().set(index, job);
+		int userUniqueId = userProfile.getId();
+
+		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
+		UserProfile userProfile2 = userProfileOptional.get();
+		userProfile2.getJobs().remove(index);
+		userProfileRepository.save(userProfile2);
+
+//		Optional<UserProfile> userProfileOptional2 = userProfileRepository.findByUserName(userId);
+//		UserProfile userProfile3 = userProfileOptional2.get();
+		userProfile2.getJobs().add(job);
+		userProfileRepository.save(userProfile2);
+
+		this.getUserDeatils(principal);
+
+		return "redirect:/edit2";
 
 	}
 }

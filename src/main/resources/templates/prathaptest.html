@@ -43,9 +43,9 @@
           <a class="btn btn-outline-danger" role="button" th:href="@{/logout}"
             >Logout</a
           >
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            View
-          </button>
+           <a class="btn btn-outline-success my-2 my-sm-0" role="button" 
+           th:href="@{'/view/'+${userProfile.userName}}">
+           View</a>
         </div>
       </div>
 
@@ -165,11 +165,20 @@
 
                     <tr>
                       <td colspan="2" style="text-align: center;">
+                      <span style="padding-left: 50px; text-align: left;">
                         <a
                           class="btn btn-outline-danger"
                           th:href="@{'./delete?type=job&index=' + ${stat.index}}"
-                          >Delete</a
-                        >
+                          >Delete</a>
+                      </span>
+                    
+                      
+                     <span style="padding-right: 50px;">
+                         <a class="btn btn-outline-danger" 
+                         th:href="@{'./edit/experience?type=job&index=' + ${stat.index}}">
+                         Update</a>
+                         </span>
+                       
                       </td>
                     </tr>
                   </div>
@@ -258,33 +267,33 @@
               <hr />
 
               <table class="table table-bordered">
-                <tr th:each="education, stat: *{userProfile.educations}">
+                <div th:each="edu, stat: *{eduList}">
                   <tr>
-                    <td>College</td>
-                    <td><input class="form-control" th:value="${education.college}"></td>
+                    <td>College</td>  
+                    <td><div class="form-control" th:text="${edu.college}"></div></td>
                   </tr>
                   <tr>
                     <td>Qualification</td>
-                    <td><input class="form-control" th:value="${education.qualification}"></td>
+                    <td><div class="form-control" th:text="${edu.qualification}"></div></td>
                   </tr>
                   <tr>
                     <td>Start Date</td>
-                    <td><input type="date" class="form-control" th:value="${education.startDate}"></td>
+                    <td><div type="date" class="form-control" th:text="${edu.startDate}"></div></td>
                   </tr>
                   <tr>
                     <td>End Date</td>
-                    <td><input type="date" class="form-control" th:value="${education.endDate}"></td>
+                    <td><div type="date" class="form-control" th:text="${edu.endDate}"></div></td>
                   </tr>
                   
                   <tr>
                     <td>Summary</td>
-                    <td><input class="form-control" th:value="${education.summary}"></td>
+                    <td><div class="form-control" th:text="${edu.summary}"></div></td>
                   </tr>
                   
                   <tr>
                     <td colspan='2' style='text-align: center;'><a class="btn btn-outline-danger" th:href="@{'./delete?type=education&index=' + ${stat.index}}">Delete</a></td>
                   </tr>
-                </tr>
+                <div>
               </table>
               
 
@@ -360,8 +369,13 @@
             </div>
           </div>
           <!-- Error Message-->
+          <div th:if="${errors.size()>0}">
+           <div class="alert alert-Error">
+            <strong>Error! </strong> <span> Profile Update Failed</span>
+          </div>
+          </div>
           <div th:each="error: ${errors}">
-            <div class="alert alert-danger">
+            <div class="alert alert-warning">
             <strong>Error! </strong> <span th:text="${error}"></span>
           </div>
           </div>  
