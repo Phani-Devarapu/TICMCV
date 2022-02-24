@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prathap Experience Edit</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #d2d2d2;
+      }
+      .headerButtons {
+        float: right !important;
+        padding: 10px;
+      }
+      .header {
+        background-color: #e3f2fd;
+      }
+      .profileDetails {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+      .experienceContainer {
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+      .expContainer {
+        background-color: white;
+        margin-top: 20px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row header">
+        <div class="col-sm-9">
+          <h3 th:text="${userId} + '\'s Profile'">Update Experience</h3>
+        </div>
+        <div class="col-sm-3 headerButtons">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Edit
+          </button>
+          <a class="btn btn-outline-danger" role="button" th:href="@{/logout}"
+            >Logout</a
+          >
+          <a
+            class="btn btn-outline-success my-2 my-sm-0"
+            role="button"
+            th:href="@{'/view/'+${userProfile.userName}}"
+          >
+            View</a
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-12">
+            <div th:if="${pa.isClicked}" class="'row expContainer">
+              <form
+                action="#"
+                th:action="@{/addJob}"
+                th:object="${newjob}"
+                method="POST"
+              >
+                <table class="col-sm-12 table table-bordered">
+                  <tr>
+                    <td >Company Name</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{company}"
+                        placeholder="Company Name"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Organisation Name</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{designation}"
+                        placeholder="Your Designation"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Start Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{startDate}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >End Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{endDate}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Current Job</td>
+                    <td >
+                      <input
+                        type="checkbox"
+                        class="form-control"
+                        th:value="*{currentJob}"
+                        style="width: 40px"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="text-align: center">
+                      <input
+                        class="btn btn-outline-success"
+                        type="submit"
+                        value="Add Experience"
+                      />
+                    </td>
+                  </tr>
+                </table>
+              </form>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
