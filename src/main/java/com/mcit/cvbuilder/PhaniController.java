@@ -29,6 +29,9 @@ public class PhaniController {
 	@Autowired
 	UserProfileRepository userProfileRepository;
 
+	@Autowired
+	JobRepository jobRepository;
+
 	@GetMapping("/")
 	public String home() {
 		return "index";
@@ -178,6 +181,11 @@ public class PhaniController {
 		userProfileRepository.save(this.modifiedUserProfile.get(principal.getName()));
 		return "redirect:/view/" + userName;
 	}
+	
+//	@GetMapping("/edit2")
+//	public String viewResume() {
+//		
+//	}
 
 	@GetMapping("/delete")
 	public String delete(Model model, Principal principal, @RequestParam String type, @RequestParam int index) {
@@ -215,7 +223,33 @@ public class PhaniController {
 		UserProfile userProfile = this.modifiedUserProfile.get(userId);
 		Job job = userProfile.getJobs().get(index);
 		model.addAttribute("job", job);
+		model.addAttribute("index", index);
 		return "experience-edit";
+
+	}
+
+	@PostMapping("/edit/experience")
+	public String editExperience(Model model, Principal principal, @ModelAttribute Job job, @RequestParam int index) {
+		System.out.println("The post experience is " + job.toString() + " " + index);
+		final String userId = principal.getName();
+		UserProfile userProfile = this.modifiedUserProfile.get(userId);
+		userProfile.getJobs().set(index, job);
+		int userUniqueId = userProfile.getId();
+		
+		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
+		UserProfile userProfile2 = userProfileOptional.get();
+		userProfile2.getJobs().remove(index);
+		userProfileRepository.save(userProfile2);
+		
+//		Optional<UserProfile> userProfileOptional2 = userProfileRepository.findByUserName(userId);
+//		UserProfile userProfile3 = userProfileOptional2.get();
+		userProfile2.getJobs().add(job);
+		userProfileRepository.save(userProfile2);
+		
+		this.getUserDeatils(principal);
+	
+
+		return "redirect:/edit2";
 
 	}
 }

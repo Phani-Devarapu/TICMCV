@@ -38,7 +38,8 @@
       <div class='col-sm-2 headerButtons'>
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Edit</button>
         <a class="btn btn-outline-danger" role="button" th:href="@{/logout}">Logout</a>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">View</button>
+        <a class="btn btn-outline-success my-2 my-sm-0" role="button" th:href="@{'/view/'+${userProfile.userName}}">View</a>
+      
       </div>
     </div>
     
@@ -120,7 +121,7 @@
                     </tr>
                     
                     <tr >  
-                      <td><a class="btn btn-outline-danger" th:href="@{'./delete?type=job&index=' + ${stat.index}}">Delete</a></td>
+                      <td><a class="btn btn-outline-danger" th:href="@{'./edit/experience?type=job&index=' + ${stat.index}}">Update</a></td>
                       <td><a class="btn btn-outline-danger" th:href="@{'./delete?type=job&index=' + ${stat.index}}">Delete</a></td>
                     </tr>
                     
