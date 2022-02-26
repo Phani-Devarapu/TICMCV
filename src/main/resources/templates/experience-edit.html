@@ -1,47 +1,145 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Experience Edit</title>
-</head>
-<body>
-    <div class="card-body">
-              <h3 class="card-title">Experience</h3>
-              <table class="table table-striped" >
-              </thead>
-                <tbody>
-                  <form action="#" th:action="@{'/edit/experience?index=' + ${index}}" th:object="${job}" method="post">
-                    <tr >
-                      <td>Company</td>
-                      <td><input class="form-control" th:field="*{company}"></input></td>
-                    </tr>
-                    <tr >
-                      <td>Designation</td>
-                      <td><input class="form-control" th:field="*{designation}"></input></td>
-                    </tr>
-                    <tr >
-                      <td>Start Date</td>
-                      <td><input class="form-control" th:field="*{startDate}"></input></td>
-                    </tr>
-                    <tr >
-                      <td>End Date</td>
-                      <td><input class="form-control" th:field="*{endDate}"></input></td>
-                    </tr>
-                    <tr >
-                      <td>Current Job</td>
-                      <td><input type="checkbox" class="form-control" th:value="*{currentJob}"  style="width:40px"/></td>
-                      
-                    </tr>
-                    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #d2d2d2;
+      }
+      .headerButtons {
+        float: right !important;
+        padding: 10px;
+      }
+      .header {
+        background-color: #e3f2fd;
+      }
+      .profileDetails {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+      .experienceContainer {
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+      .expContainer {
+        background-color: white;
+        margin-top: 20px;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row header">
+        <div class="col-sm-9">
+          <h3 th:text="${userId} + '\'s Profile'">Update Experience</h3>
+        </div>
+        <div class="col-sm-3 headerButtons">
+           <a class="btn btn-outline-danger" role="button" th:href="@{/edit}"
+            >Edit</a
+          >
+          <a class="btn btn-outline-danger" role="button" th:href="@{/logout}"
+            >Logout</a
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <form action="#" th:action="@{'/edit/experience?index=' + ${index}}" th:object="${job}" method="post"> 
+                <table class="col-sm-12 table table-bordered">
+                  <tr>
+                    <td >Company Name</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{company}"
+                        placeholder="Company Name"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Organisation Name</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{designation}"
+                        placeholder="Your Designation"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Start Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{startDate}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >End Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{endDate}"
+                      />
+                    </td>
+                  </tr>
                   
-<!--                      <form action="#" th:action="@{/edit/experience}" th:object="${job}" method="post"> -->
-   <input class="btn btn-outline-success btn-block" type="submit" value="Update Job">
- </form>
-                   
-                
-                  </div>
-                </tbody>
+                   <tr>
+          <td colspan="2">
+            <p>Job Responsibilites</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+           <textarea
+           class="form-control"
+           th:field="*{summary}"
+           rows="4"
+           placeholder="Job Responsibilities seperated by Comma"></textarea>
+           
+         </td>
+         
+                  <tr>
+                    <td>Current Job</td>
+                    <td >
+                      <input
+                        type="checkbox"
+                        class="form-control"
+                        th:value="*{currentJob}"
+                        style="width: 40px"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" style="text-align: center">
+                      <input
+                        class="btn btn-outline-success"
+                        type="submit"
+                        value="Add Experience"
+                      />
+                    </td>
+                  </tr>
                 </table>
-                </div>
-</body>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

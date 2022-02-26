@@ -1,10 +1,12 @@
 package com.mcit.cvbuilder;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +22,7 @@ import com.mcit.models.Job;
 import com.mcit.models.UserProfile;
 
 @Controller
-public class PhaniController {
+public class ResumeBuilderController {
 
 	HashMap<String, UserProfile> dbUserProfiles = new HashMap<String, UserProfile>();
 	HashMap<String, UserProfile> modifiedUserProfile = new HashMap<String, UserProfile>();
@@ -30,11 +32,6 @@ public class PhaniController {
 	@Autowired
 	UserProfileRepository userProfileRepository;
 
-	@GetMapping("/")
-	public String home() {
-		return "index";
-	}
-
 	private void getUserDeatils(Principal principal) {
 		String userId = principal.getName();
 		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
@@ -43,7 +40,7 @@ public class PhaniController {
 		this.modifiedUserProfile.put(userId, userProfileOptional.get());
 	}
 
-	@GetMapping("/edit2")
+	@GetMapping("/edit")
 	public String edit(Model model, Principal principal, @RequestParam(required = false) String add,
 			@ModelAttribute Job job, @ModelAttribute UserProfile userprofilee) {
 
@@ -79,24 +76,27 @@ public class PhaniController {
 		model.addAttribute("pa", buttonClicks);
 		model.addAttribute("errors", validateProfile);
 
-		// if ("job".equals(add)) {
 		model.addAttribute("newjob", new Job());
 		model.addAttribute("newEducation", new Education());
 		model.addAttribute("newSkill", new String());
 		model.addAttribute("userId", principal.getName());
-		// }
 
-		//return "profile-edit-phani";
-		return "prathaptest";
+		return "profile-edit";
 	}
 
 	@PostMapping("/addJob")
 	public String addJob(Model model, Principal principal, @ModelAttribute Job job) {
-		System.out.println("The new job is " + job.toString());
+		System.out.println("The new job is " + job.getSummary());
+
+		String[] split = job.getSummary().split(",");
 
 		UserProfile moUserProfile = this.modifiedUserProfile.get(principal.getName());
 
 		List<Job> oldJobs = moUserProfile.getJobs();
+
+		List<String> arr = Arrays.asList(split);
+
+		job.setResponsibilities(arr);
 		oldJobs.add(job);
 		moUserProfile.setJobs(oldJobs);
 
@@ -106,7 +106,7 @@ public class PhaniController {
 		model.addAttribute("newjob", new Job());
 		model.addAttribute("newEducation", new Education());
 		model.addAttribute("newSkill", new String());
-		return "redirect:/edit2";
+		return "redirect:/edit";
 	}
 
 	@PostMapping("/addEducation")
@@ -125,7 +125,7 @@ public class PhaniController {
 		model.addAttribute("newjob", new Job());
 		model.addAttribute("newEducation", new Education());
 		model.addAttribute("newSkill", new String());
-		return "redirect:/edit2";
+		return "redirect:/edit";
 	}
 
 	@PostMapping("/addSkill")
@@ -143,7 +143,7 @@ public class PhaniController {
 		model.addAttribute("newjob", new Job());
 		model.addAttribute("newEducation", new Education());
 		model.addAttribute("newSkill", new String());
-		return "redirect:/edit2";
+		return "redirect:/edit";
 	}
 
 	@PostMapping("/updateUserDetails")
@@ -164,10 +164,10 @@ public class PhaniController {
 		model.addAttribute("newjob", new Job());
 		model.addAttribute("newEducation", new Education());
 		model.addAttribute("newSkill", new String());
-		return "redirect:/edit2";
+		return "redirect:/edit";
 	}
 
-	@PostMapping("/edit2")
+	@PostMapping("/edit")
 	public String postEdit(Model model, Principal principal, @ModelAttribute UserProfile userProfile) {
 		String userName = principal.getName();
 		Validations validations = new Validations();
@@ -175,7 +175,7 @@ public class PhaniController {
 		validateProfile.addAll(validations.validateDates(this.modifiedUserProfile.get(principal.getName())));
 
 		if (validateProfile.size() > 0) {
-			return "redirect:/edit2";
+			return "redirect:/edit";
 		}
 
 		userProfile.setId(this.dbUserProfiles.get(principal.getName()).getId());
@@ -201,7 +201,7 @@ public class PhaniController {
 		this.modifiedUserProfile.remove(principal.getName());
 		this.getUserDeatils(principal);
 
-		return "redirect:/edit2";
+		return "redirect:/edit";
 	}
 
 	@GetMapping("/edit/education")
@@ -219,8 +219,11 @@ public class PhaniController {
 		final String userId = principal.getName();
 		UserProfile userProfile = this.modifiedUserProfile.get(userId);
 		Job job = userProfile.getJobs().get(index);
+		String responsibilities = job.getResponsibilities().stream().collect(Collectors.joining(","));
+		job.setSummary(responsibilities);
 		model.addAttribute("job", job);
 		model.addAttribute("index", index);
+		model.addAttribute("userId", userId);
 		return "experience-edit";
 
 	}
@@ -238,14 +241,12 @@ public class PhaniController {
 		userProfile2.getJobs().remove(index);
 		userProfileRepository.save(userProfile2);
 
-//		Optional<UserProfile> userProfileOptional2 = userProfileRepository.findByUserName(userId);
-//		UserProfile userProfile3 = userProfileOptional2.get();
 		userProfile2.getJobs().add(job);
 		userProfileRepository.save(userProfile2);
 
 		this.getUserDeatils(principal);
 
-		return "redirect:/edit2";
+		return "redirect:/edit";
 
 	}
 }

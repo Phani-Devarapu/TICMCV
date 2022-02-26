@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table
 public class UserProfile {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
