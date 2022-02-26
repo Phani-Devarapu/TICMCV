@@ -28,10 +28,16 @@ public class HomeController {
 
 	@Autowired
 	MyUserDetailsService myUserDetailsService;
-	
+
 	@GetMapping("/")
 	public String home() {
 		return "index";
+	}
+
+	@GetMapping("/home")
+	public String LandingPage(Principal principal, Model model) {
+		model.addAttribute("userId", principal.getName());
+		return "home";
 	}
 
 	@GetMapping(path = "/registerForm")

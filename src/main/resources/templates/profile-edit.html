@@ -37,15 +37,15 @@
         <h1 th:text="${userId} + '\'s Profile'">Profile</h1>
       </div>
       <div class="col-sm-3 headerButtons">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Edit
-        </button>
-        <a class="btn btn-outline-danger" role="button" th:href="@{/logout}"
-        >Logout</a
+         <a class="btn btn-outline-danger" role="button" th:href="@{/home}"
+        >Home</a
         >
         <a class="btn btn-outline-success my-2 my-sm-0" role="button" 
         th:href="@{'/view/'+${userProfile.userName}}">
       View</a>
+       <a class="btn btn-outline-danger" role="button" th:href="@{/logout}"
+        >Logout</a
+        >
     </div>
   </div>
 

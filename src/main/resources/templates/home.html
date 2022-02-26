@@ -51,15 +51,19 @@
       </div>
       <div class="row buttonContainer">
         <div class="col-sm-6">
-          <button class="btn indButton my-2 my-sm-0" type="submit">
-            Edit
-          </button>
+         <a
+            class="btn indButton my-2 my-sm-0"
+            role="button"
+            th:href="@{/edit}"
+          >
+            Edit</a
+          >
         </div>
         <div class="col-sm-6">
           <a
             class="btn indButton my-2 my-sm-0"
             role="button"
-            th:href="@{'/view/'+${userProfile.userName}}"
+            th:href="@{'/view/'+${userId}}"
           >
             View</a
           >
