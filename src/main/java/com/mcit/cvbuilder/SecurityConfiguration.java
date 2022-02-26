@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/edit").authenticated()	
 		.antMatchers("/*").permitAll()
 		.and().formLogin()
-		.defaultSuccessUrl("/edit", true)
+		.defaultSuccessUrl("/home", true)
 		.and().logout()
 		.logoutUrl("/logout")
 				.logoutSuccessUrl("/");
