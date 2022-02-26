@@ -61,7 +61,7 @@ public class HomeController {
 		if (save != null) {
 			model.addAttribute("RegisterForm", new RegisterForm());
 			userProfileRepository.save(userProfile);
-			return "registration-success";
+			return "index";
 		} else {
 			model.addAttribute("errorMessage", "UserName Already Exists");
 			return "error";

@@ -54,7 +54,7 @@
 <div class="card" style="width: 55rem; ">
 
   <div class="card-body">
-<form th:action="@{/registerForm}" method="post" th:object="${RegisterForm}">
+<form th:action="@{/#}" method="post" th:object="${RegisterForm}">
   <div>
     <label>First Name</label>
     <input type="text" class="form-control" th:field="*{firstName}" required>
