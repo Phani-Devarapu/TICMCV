@@ -11,98 +11,106 @@ import java.util.List;
 @Entity
 @Table
 public class Job {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
+
+	private String company;
+
+	private String designation;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate endDate;
+
+	private boolean isCurrentJob;
+
+	@ElementCollection(targetClass = String.class)
+	private List<String> responsibilities = new ArrayList();
+
+	@Transient
+	private String summary;
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    
-    private String company;
-    
-    private String designation;
-    
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDate;
-    
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endDate;
-    
-    private boolean isCurrentJob;
-    
-    @ElementCollection(targetClass=String.class)
-    private List<String> responsibilities = new ArrayList();
+	
 
-    public List<String> getResponsibilities() {
-        return responsibilities;
-    }
+	public String getSummary() {
+		return summary;
+	}
 
-    public void setResponsibilities(List<String> responsibilities) {
-        this.responsibilities = responsibilities;
-    }
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
-    public boolean isCurrentJob() {
-        return isCurrentJob;
-    }
+	public List<String> getResponsibilities() {
+		return responsibilities;
+	}
 
-    public void setCurrentJob(boolean currentJob) {
-        isCurrentJob = currentJob;
-    }
+	public void setResponsibilities(List<String> responsibilities) {
+		this.responsibilities = responsibilities;
+	}
 
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id=" + id +
-                ", company='" + company + '\'' +
-                ", designation='" + designation + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
+	public boolean isCurrentJob() {
+		return isCurrentJob;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setCurrentJob(boolean currentJob) {
+		isCurrentJob = currentJob;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	@Override
+	public String toString() {
+		return "Job{" + "id=" + id + ", company='" + company + '\'' + ", designation='" + designation + '\''
+				+ ", startDate=" + startDate + ", endDate=" + endDate + '}';
+	}
 
-    public String getCompany() {
-        return company;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setCompany(String company) {
-        this.company = company;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getDesignation() {
-        return designation;
-    }
+	public String getCompany() {
+		return company;
+	}
 
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
+	public void setCompany(String company) {
+		this.company = company;
+	}
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+	public String getDesignation() {
+		return designation;
+	}
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+	public LocalDate getStartDate() {
+		return startDate;
+	}
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+	public void setStartDate(LocalDate startDate) {
+		this.startDate = startDate;
+	}
 
-    public String getFormattedStartDate() {
-        return startDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
-    }
+	public LocalDate getEndDate() {
+		return endDate;
+	}
 
-    public String getFormattedEndDate() {
-        return endDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
-    }
+	public void setEndDate(LocalDate endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getFormattedStartDate() {
+		return startDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
+	}
+
+	public String getFormattedEndDate() {
+		return endDate.format(DateTimeFormatter.ofPattern("MMM yyyy"));
+	}
 }

@@ -7,16 +7,18 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @Table(name = "User")
 public class User {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    
+    @Column(unique=true)
     private String userName;
+    
     private String password;
     private boolean active;
     private String roles;
-    
-    
-    //
+   
     
 	//new fileds
 	private String firstName;

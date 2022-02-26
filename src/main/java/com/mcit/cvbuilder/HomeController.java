@@ -28,11 +28,11 @@ public class HomeController {
 
 	@Autowired
 	MyUserDetailsService myUserDetailsService;
-
-//	@GetMapping("/")
-//	public String home() {
-//		return "index";
-//	}
+	
+	@GetMapping("/")
+	public String home() {
+		return "index";
+	}
 
 	@GetMapping(path = "/registerForm")
 	public String getRegisterForm(Model model, RegisterForm registerForm) {
@@ -46,7 +46,8 @@ public class HomeController {
 
 		System.out.println(registerForm.toString());
 
-		myUserDetailsService.save(registerForm);
+		User save = myUserDetailsService.save(registerForm);
+		System.out.println("The saved user is " + save.toString());
 
 		UserProfile userProfile = new UserProfile();
 
@@ -57,68 +58,16 @@ public class HomeController {
 		userProfile.setTheme(1);
 		// userProfile.setPhone(registerForm.)
 
-		model.addAttribute("RegisterForm", new RegisterForm());
-		userProfileRepository.save(userProfile);
-		return "registration-success";
+		if (save != null) {
+			model.addAttribute("RegisterForm", new RegisterForm());
+			userProfileRepository.save(userProfile);
+			return "registration-success";
+		} else {
+			model.addAttribute("errorMessage", "UserName Already Exists");
+			return "error";
+		}
 	}
 
-//
-//	@GetMapping("/edit")
-//	public String edit(Model model, Principal principal, @RequestParam(required = false) String add, Job job,
-//			@ModelAttribute UserProfile userprofilee) {
-//		String userId = principal.getName();
-//		model.addAttribute("userId", userId); // which userId? from where? -> from html page ${userId}
-//		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
-//		userProfileOptional.orElseThrow(() -> new RuntimeException("Not found: " + userId));
-//		UserProfile userProfile = userProfileOptional.get();
-//		if ("job".equals(add)) {
-//			if (job == null) {
-//
-//				userProfile.getJobs().add(new Job());
-//
-//			} else {
-//				userProfile.getJobs().add(job);
-//
-//			}
-//		} else if ("education".equals(add)) {
-//			userProfile.getEducations().add(new Education());
-//		} else if ("skill".equals(add)) {
-//			userProfile.getSkills().add("");
-//		}
-//
-//		model.addAttribute("userProfile", userProfile);
-//		return "profile-edit";
-//	}
-//
-//	@GetMapping("/delete")
-//	public String delete(Model model, Principal principal, @RequestParam String type, @RequestParam int index) {
-//		String userId = principal.getName();
-//		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
-//		userProfileOptional.orElseThrow(() -> new RuntimeException("Not found: " + userId));
-//		UserProfile userProfile = userProfileOptional.get();
-//		if ("job".equals(type)) {
-//			userProfile.getJobs().remove(index);
-//		} else if ("education".equals(type)) {
-//			userProfile.getEducations().remove(index);
-//		} else if ("skill".equals(type)) {
-//			userProfile.getSkills().remove(index);
-//		}
-//		userProfileRepository.save(userProfile);
-//		return "redirect:/edit";
-//	}
-//
-//	@PostMapping("/edit")
-//	public String postEdit(Model model, Principal principal, @ModelAttribute UserProfile userProfile) {
-//		String userName = principal.getName();
-//		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userName);
-//		userProfileOptional.orElseThrow(() -> new RuntimeException("Not found: " + userName));
-//		UserProfile savedUserProfile = userProfileOptional.get();
-//		userProfile.setId(savedUserProfile.getId());
-//		userProfile.setUserName(userName);
-//		userProfileRepository.save(userProfile);
-//		return "redirect:/view/" + userName;
-//	}
-//
 	@GetMapping("/view/{userId}")
 	public String view(Principal principal, @PathVariable String userId, Model model) {
 		if (principal != null && principal.getName() != "") {
