@@ -40,6 +40,16 @@ public class HomeController {
 		return "home";
 	}
 
+	@GetMapping("/login")
+	public String LoginPage() {
+		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String LogoutPage() {
+		return "logout";
+	}
+
 	@GetMapping(path = "/registerForm")
 	public String getRegisterForm(Model model, RegisterForm registerForm) {
 
@@ -68,7 +78,7 @@ public class HomeController {
 
 		model.addAttribute("RegisterForm", new RegisterForm());
 		userProfileRepository.save(userProfile);
-		return "registration-success";
+		return "redirect:/login";
 	}
 
 	@GetMapping("/view/{userId}")
