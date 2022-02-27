@@ -234,12 +234,13 @@ public class ResumeBuilderController {
 		final String userId = principal.getName();
 		UserProfile userProfile = this.modifiedUserProfile.get(userId);
 		userProfile.getJobs().set(index, job);
-		int userUniqueId = userProfile.getId();
 
 		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
 		UserProfile userProfile2 = userProfileOptional.get();
 		userProfile2.getJobs().remove(index);
 		userProfileRepository.save(userProfile2);
+
+		job.setResponsibilities(Arrays.asList(job.getSummary().split(",")));
 
 		userProfile2.getJobs().add(job);
 		userProfileRepository.save(userProfile2);
