@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <title>New Login Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Caveat", cursive;
+      }
+      .header {
+        padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        background-color: #4267b2;
+        cursor: pointer;
+      }
+      .header a {
+        font-size: 30px;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        margin: 0;
+      }
+      .header:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .mainContainer {
+        height:100%;
+        background: rgb(2, 0, 36);
+        background-image: linear-gradient(90deg, white, #7a94c9);
+    }
+    .loginForm{
+      margin-top:100px;
+      min-width:40%;
+      background-color: white;
+      border-radius: 10px;
+      padding: 20px 10px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+    .loginForm input,.loginForm button,.loginHead{
+      display: block;
+      box-sizing: border-box;
+      padding: 10px;
+      margin: 20px 5%;
+      width:90%;
+
+    }
+    </style>
+  </head>
+  <body>
+    <div style="max-height:100vh;overflow: hidden;height:100vh">
+      <div class="header"><a href="#">Resume portal</a></div>
+      <div class="mainContainer">
+    
+        <div class="d-flex justify-content-center">
+          <form class="loginForm">
+            <h2 class="loginHead">Login </h2>
+            <input placeholder="username" type='text' />
+            <input placeholder="password" type='password' />
+            <button type="button" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>
