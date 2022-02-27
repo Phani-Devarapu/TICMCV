@@ -4,7 +4,13 @@ import java.security.Principal;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,10 +50,23 @@ public class HomeController {
 	public String LoginPage() {
 		return "login";
 	}
-	
-	@GetMapping("/logout")
+
+	@GetMapping("/confirmlogout")
 	public String LogoutPage() {
-		return "logout";
+		return "confirm-logout";
+	}
+
+	@GetMapping("/logout")
+	public String LogoutUser(@RequestParam(required = false) String confirm) {
+
+		if (confirm.equals("YES")) {
+
+			SecurityContextHolder.clearContext();
+			return "redirect:/login";
+
+		} else {
+			return "redirect:/home";
+		}
 	}
 
 	@GetMapping(path = "/registerForm")
