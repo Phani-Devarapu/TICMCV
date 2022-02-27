@@ -64,22 +64,21 @@
 <div class="header"><a href="#">Resume portal</a></div>
 <div class="mainContainer">
 <div class="d-flex justify-content-center">
-<form name="f" th:action="@{/login}" class='loginForm' method="post">
-        <fieldset>
+    
+           <div class="loginForm">
             <h2 class="loginHead">Are you Sure want to LogOut? </h2>
             <div class='row'>
             	<div class='col-sm-6'>
-            <button type="button" class="btn btn-primary">Logout</button>  
+            <a class="btn btn-primary btn-block" role="button" th:href="@{/logout?confirm=YES}">Confirm</a> 
             </div>         
             <div class='col-sm-6'>
-            <button type="button" class="btn btn-danger">Cancel</button>
-            
+            <a class="btn btn-danger btn-block" role="button" th:href="@{/logout?confirm=NO}">Cancel</a>
             </div>
+           </div>
             	
-            </div>
+</div>
             
-        </fieldset>
-    </form>
+
 </div>
 </div>
     

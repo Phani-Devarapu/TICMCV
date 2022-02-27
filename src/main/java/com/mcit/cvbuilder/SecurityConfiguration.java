@@ -17,6 +17,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	UserDetailsService userDetailsService;
 
+	@Autowired
+	CustomLogoutHandler logoutHandler;
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
@@ -25,12 +28,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/edit").authenticated()	
+		.antMatchers("/edit/**").authenticated()
+		.antMatchers("/home**").authenticated()
+		.antMatchers("/view/**").authenticated()
+		.antMatchers("/add**").authenticated()
+		.antMatchers("/update**").authenticated()
 		.antMatchers("/*").permitAll()
-		.and().formLogin().loginPage("/login")
-		.defaultSuccessUrl("/home", true)
-		.and().logout()
-		.logoutUrl("/logout")
+		.and().formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/home", true)
+				.and()
+				.logout()
+				.logoutUrl("/logout")
+				.addLogoutHandler(logoutHandler)
 				.logoutSuccessUrl("/");
 	}
 
