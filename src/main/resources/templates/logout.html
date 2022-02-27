@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -31,43 +31,58 @@
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       }
       .mainContainer {
-        height:100%;
+        height:100vh;
         background: rgb(2, 0, 36);
         background-image: linear-gradient(90deg, white, #7a94c9);
     }
     .loginForm{
-      margin-top:100px;
-      min-width:40%;
+      margin-top:60px;
+      min-width:50%;
+      text-align:center;
       background-color: white;
       border-radius: 10px;
-      padding: 20px 10px;
+      padding: 0px 10px;
       box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      padding-bottom:20px;
     }
     .loginForm input,.loginForm button,.loginHead{
       display: block;
       box-sizing: border-box;
       padding: 10px;
-      margin: 20px 5%;
+      margin: 10px 5%;
       width:90%;
 
+    }
+    .loginHead{
+    padding-bottom:30px;
     }
     </style>
   </head>
   <body>
-    <div style="max-height:100vh;overflow: hidden;height:100vh">
-      <div class="header"><a href="#">Resume portal</a></div>
-      <div class="mainContainer">
-    
-        <div class="d-flex justify-content-center">
-          <form class="loginForm">
-            <h2 class="loginHead">Login </h2>
-            <input placeholder="username" type='text' />
-            <input placeholder="password" type='password' />
-            <button type="button" class="btn btn-primary">Login</button>
-          </form>
-        </div>
 
-      </div>
-    </div>
+<div style="max-height:100vh;overflow: hidden;height:100vh">
+<div class="header"><a href="#">Resume portal</a></div>
+<div class="mainContainer">
+<div class="d-flex justify-content-center">
+<form name="f" th:action="@{/login}" class='loginForm' method="post">
+        <fieldset>
+            <h2 class="loginHead">Are you Sure want to LogOut? </h2>
+            <div class='row'>
+            	<div class='col-sm-6'>
+            <button type="button" class="btn btn-primary">Logout</button>  
+            </div>         
+            <div class='col-sm-6'>
+            <button type="button" class="btn btn-danger">Cancel</button>
+            
+            </div>
+            	
+            </div>
+            
+        </fieldset>
+    </form>
+</div>
+</div>
+    
+</div>
   </body>
 </html>

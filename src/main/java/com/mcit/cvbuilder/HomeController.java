@@ -28,10 +28,26 @@ public class HomeController {
 
 	@Autowired
 	MyUserDetailsService myUserDetailsService;
-	
+
 	@GetMapping("/")
 	public String home() {
 		return "index";
+	}
+
+	@GetMapping("/home")
+	public String LandingPage(Principal principal, Model model) {
+		model.addAttribute("userId", principal.getName());
+		return "home";
+	}
+
+	@GetMapping("/login")
+	public String LoginPage() {
+		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String LogoutPage() {
+		return "logout";
 	}
 
 	@GetMapping(path = "/registerForm")
@@ -44,10 +60,13 @@ public class HomeController {
 	@PostMapping(path = "/registerForm")
 	public String submitRegistration(Model model, @ModelAttribute UserRegistrationDto registerForm) {
 
-		System.out.println(registerForm.toString());
-
-		User save = myUserDetailsService.save(registerForm);
-		System.out.println("The saved user is " + save.toString());
+		try {
+			User savedUser = myUserDetailsService.save(registerForm);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			model.addAttribute("errorMessage", "UserName already exists Please Try Again");
+			return "error";
+		}
 
 		UserProfile userProfile = new UserProfile();
 
@@ -56,16 +75,10 @@ public class HomeController {
 		userProfile.setEmail(registerForm.getEmail());
 		userProfile.setUserName(registerForm.getUserName());
 		userProfile.setTheme(1);
-		// userProfile.setPhone(registerForm.)
 
-		if (save != null) {
-			model.addAttribute("RegisterForm", new RegisterForm());
-			userProfileRepository.save(userProfile);
-			return "index";
-		} else {
-			model.addAttribute("errorMessage", "UserName Already Exists");
-			return "error";
-		}
+		model.addAttribute("RegisterForm", new RegisterForm());
+		userProfileRepository.save(userProfile);
+		return "redirect:/login";
 	}
 
 	@GetMapping("/view/{userId}")

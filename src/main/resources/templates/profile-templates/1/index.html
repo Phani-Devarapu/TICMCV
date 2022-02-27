@@ -23,7 +23,7 @@
 			<h1 class="quickFade delayTwo">
 				<span th:text="${userProfile.firstName}">Joe</span>
 				<span th:text="${userProfile.lastName}">Bloggs</span>
-				<a th:if="${currentUsersProfile}" href="/edit2">Edit</a>
+				<a th:if="${currentUsersProfile}" href="/edit">Edit</a>
 			</h1>
 			<h2 class="quickFade delayThree" th:text="${userProfile.designation}">Job Title</h2>
 		</div>
@@ -95,6 +95,9 @@
 				<article>
 					<h2 th:text="${education.college}">College/University</h2>
 					<p class="subDetails" th:text="${education.qualification}">Qualification</p>
+					<p class="subDetails">
+						<span th:text="${education.formattedStartDate}">April 2011</span> -
+						<span th:text="${education.formattedEndDate}">End Date</span></p>
 					<p th:text="${education.summary}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies massa et erat luctus hendrerit. Curabitur non consequat enim.</p>
 				</article>
 
