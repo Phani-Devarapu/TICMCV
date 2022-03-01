@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-bordered">
+    <div th:each="jobPosition, stat: *{all}">
+        <tr>
+            <td>Job Title</td>
+            <td><div class="form-control" th:text="${jobPosition.jobTitle}"></div></td>
+        </tr>
+        <tr>
+            <td>Job Description</td>
+            <td><div class="form-control" th:text="${jobPosition.jobDescription}"></div></td>
+        </tr>
+        <tr>
+            <td>Salary</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.salary}"></div></td>
+        </tr>
+        <tr>
+            <td>Job Type</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.jobType}"></div></td>
+        </tr>
+        <tr>
+            <td>Company Name</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.companyName}"></div></td>
+        </tr>
+        <tr>
+            <td>Company Description</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.companyDescription}"></div></td>
+        </tr>
+        <tr>
+            <td>Company Address</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.companyAddress}"></div></td>
+        </tr>
+        <tr>
+            <td>Company Email</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.companyEmail}"></div></td>
+        </tr>
+        <tr>
+            <td>Company Phone</td>
+            <td><div type="date" class="form-control" th:text="${jobPosition.companyPhone}"></div></td>
+        </tr>
+
+        <tr>
+            <td colspan='2' style='text-align: center;'><a class="btn btn-outline-danger" th:href="@{'./delete?type=education&index=' + ${stat.index}}">Delete</a></td>
+        </tr>
+        </div>
+</table>
+</body>
+</html>

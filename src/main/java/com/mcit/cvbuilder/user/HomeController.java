@@ -5,7 +5,8 @@ import java.security.Principal;
 import java.util.Optional;
 
 
-
+import com.mcit.company.models.Models.MapperClass;
+import com.mcit.company.models.Repository.MappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,9 @@ public class HomeController {
     @Autowired
     MyUserDetailsService myUserDetailsService;
 
+    @Autowired
+    MappingRepository mappingRepository;
+
     @GetMapping("/")
     public String home() {
         return "index";
@@ -38,7 +42,13 @@ public class HomeController {
     @GetMapping("/home")
     public String LandingPage(Principal principal, Model model) {
         model.addAttribute("userId", principal.getName());
-        return "home";
+
+        MapperClass byCompanyName = mappingRepository.findBycompanyLoginId(principal.getName());
+        if (byCompanyName != null) {
+            return "company-home";
+        } else {
+            return "home";
+        }
     }
 
     @GetMapping("/login")

@@ -1,10 +1,10 @@
 package com.mcit.company.models.Controller;
 
-import com.mcit.company.models.Models.CompanyProfile;
 import com.mcit.company.models.Models.JobPositions;
+import com.mcit.company.models.Models.MapperClass;
 import com.mcit.company.models.Repository.JobPositionRepository;
+import com.mcit.company.models.Repository.MappingRepository;
 import com.mcit.cvbuilder.user.MyUserDetailsService;
-import com.mcit.cvbuilder.user.UserProfileRepository;
 import com.mcit.models.RegisterForm;
 import com.mcit.models.User;
 import com.mcit.resumebuilder.dto.UserRegistrationDto;
@@ -12,22 +12,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/company")
 public class CompanyHomeController {
 
+    @Autowired
+    JobPositionRepository jobPositionRepository;
 
-    @Autowired
-    UserProfileRepository userProfileRepository;
-    @Autowired
-	JobPositionRepository jobPositionRepository;
     @Autowired
     MyUserDetailsService myUserDetailsService;
 
+    @Autowired
+    MappingRepository mappingRepository;
 
     @GetMapping("/home")
     public String LandingPage(Principal principal, Model model) {
@@ -59,7 +59,6 @@ public class CompanyHomeController {
 
     @GetMapping("/companyRegisterForm")
     public String getCompanyRegisterForm(Model model, RegisterForm registerForm) {
-//        System.out.println("skhdfkjdhkf");
         model.addAttribute("RegisterForm", new UserRegistrationDto());
         return "company-registration";
     }
@@ -70,27 +69,34 @@ public class CompanyHomeController {
 
         try {
             User savedUser = myUserDetailsService.save(registerForm);
+            MapperClass mapping = new MapperClass();
+
+            mapping.setCompanyLoginId(registerForm.getUserName());
+            System.out.println(registerForm.getUserName());
+            mapping.setIscompanyLoginId(true);
+            System.out.println(mapping.toString());
+            mappingRepository.save(mapping);
         } catch (Exception e) {
             System.out.println(e.toString());
             model.addAttribute("errorMessage", "CompanyName already exists Please Try Again");
             return "error";
         }
 
-        CompanyProfile companyProfile = new CompanyProfile();
-
-        companyProfile.setCompanyName(registerForm.getFirstName());
-//		companyProfile.setLastName(registerForm.getLastName());
-        companyProfile.setEmail(registerForm.getEmail());
-        companyProfile.setCompanyLoginId(registerForm.getUserName());
-        companyProfile.setTheme(1);
-
-        model.addAttribute("RegisterForm", new RegisterForm());
-        userProfileRepository.save(companyProfile);
+//        CompanyProfile companyProfile = new CompanyProfile();
+//
+//        companyProfile.setCompanyName(registerForm.getFirstName());
+////		companyProfile.setLastName(registerForm.getLastName());
+//        companyProfile.setEmail(registerForm.getEmail());
+//        companyProfile.setCompanyLoginId(registerForm.getUserName());
+//        companyProfile.setTheme(1);
+//
+//        model.addAttribute("RegisterForm", new RegisterForm());
+//        userProfileRepository.save(companyProfile);
         return "redirect:/login";
     }
 
-	@GetMapping("/viewJobs")
-	public String view(Model model) {
+    @GetMapping("/viewJobs")
+    public String view(Model model) {
 //		if (principal != null && principal.getName() != "") {
 //			boolean currentUsersProfile = principal.getName().equals(companyLoginId);
 //			model.addAttribute("currentUsersProfile", currentUsersProfile);
@@ -103,10 +109,10 @@ public class CompanyHomeController {
 //		CompanyProfile companyProfile = userProfileOptional.get();
 //		model.addAttribute("companyProfile", companyProfile);
 //		System.out.println(companyProfile.getJobs());
-		List<JobPositions> all = jobPositionRepository.findAll();
-		model.addAttribute("all",all);
-		System.out.println(jobPositionRepository.findAll());
-		return "job-list";
-	}
+        List<JobPositions> all = jobPositionRepository.findAll();
+        model.addAttribute("all", all);
+        System.out.println(jobPositionRepository.findAll());
+        return "job-list";
+    }
 
 }
