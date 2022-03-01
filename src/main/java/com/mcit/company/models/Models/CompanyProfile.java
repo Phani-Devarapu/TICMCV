@@ -16,9 +16,10 @@ public class CompanyProfile {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int jobId;
+    private int id;
+    private int theme;
     private String companyName;
-    private String companyEmail;
+    private String email;
     private String companyPhone;
     private String designation;
 

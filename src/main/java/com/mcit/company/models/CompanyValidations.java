@@ -1,41 +1,36 @@
-package com.mcit.cvbuilder.company;
+package com.mcit.company.models;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.mcit.company.models.CompanyProfile;
 import com.mcit.models.Education;
 import com.mcit.models.Job;
 import com.mcit.models.UserProfile;
 
-public class Validations {
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class CompanyValidations {
 
 	Set<String> validationErros = new HashSet();
 
-	public Set<String> validateProfile(CompanyProfile companyProfile) {
+	public Set<String> validateProfile(UserProfile userProfile) {
 
-		if (companyProfile.getCompanyName().isBlank()) {
-			validationErros.add("CompanyName should not be empty");
+		if (userProfile.getFirstName().isBlank()) {
+			validationErros.add("FirstName should not be empty");
 		}
-		if (companyProfile.getCompanyEmail().isBlank() || companyProfile.getCompanyEmail().length() < 8) {
+		if (userProfile.getLastName().isBlank()) {
+			validationErros.add("LastName should not be empty");
+		}
+		if (userProfile.getEmail().isBlank() || userProfile.getEmail().length() < 8) {
 			validationErros.add("Not a Valid Email");
-		}
-		if (companyProfile.getCompanyPhone().isBlank()) {
-			validationErros.add("CompanyPhone should not be empty");
-		}
-		if (companyProfile.getDesignation().isBlank()) {
-			validationErros.add("Designation should not be empty");
 		}
 		return validationErros;
 
 	}
 
-	public Set<String> validateDates(CompanyProfile companyProfile) {
-		validateExperienceDate(companyProfile.getJobs());
-		validateEducationDate(companyProfile.getEducations());
+	public Set<String> validateDates(UserProfile userProfile) {
+		validateExperienceDate(userProfile.getJobs());
+		validateEducationDate(userProfile.getEducations());
 		return validationErros;
 	}
 

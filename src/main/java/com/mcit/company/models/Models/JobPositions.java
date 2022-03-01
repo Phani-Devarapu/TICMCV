@@ -1,4 +1,4 @@
-package com.mcit.company.models;
+package com.mcit.company.models.Models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class JobOffer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int jobId;
+	private int id;
 	private String jobTitle;
 	private String jobDescription;
 	private int salary;
