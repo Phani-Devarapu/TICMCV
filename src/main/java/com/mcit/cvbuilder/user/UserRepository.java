@@ -1,6 +1,5 @@
-package com.mcit.cvbuilder;
+package com.mcit.cvbuilder.user;
 
-import com.mcit.company.models.CompanyUser;
 import com.mcit.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

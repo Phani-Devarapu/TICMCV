@@ -1,5 +1,6 @@
 package com.mcit.company.models;
 
+import com.mcit.company.models.Models.CompanyProfile;
 import com.mcit.models.Education;
 import com.mcit.models.Job;
 import com.mcit.models.UserProfile;
@@ -13,13 +14,13 @@ public class CompanyValidations {
 
 	Set<String> validationErros = new HashSet();
 
-	public Set<String> validateProfile(UserProfile userProfile) {
+	public Set<String> validateProfile(CompanyProfile userProfile) {
 
-		if (userProfile.getFirstName().isBlank()) {
-			validationErros.add("FirstName should not be empty");
+		if (userProfile.getCompanyName().isBlank()) {
+			validationErros.add("CompanyName should not be empty");
 		}
-		if (userProfile.getLastName().isBlank()) {
-			validationErros.add("LastName should not be empty");
+		if (userProfile.getCompanySecondaryName().isBlank()) {
+			validationErros.add("CompanySecondaryName should not be empty");
 		}
 		if (userProfile.getEmail().isBlank() || userProfile.getEmail().length() < 8) {
 			validationErros.add("Not a Valid Email");
@@ -28,11 +29,11 @@ public class CompanyValidations {
 
 	}
 
-	public Set<String> validateDates(UserProfile userProfile) {
-		validateExperienceDate(userProfile.getJobs());
-		validateEducationDate(userProfile.getEducations());
-		return validationErros;
-	}
+//	public Set<String> validateDates(CompanyProfile userProfile) {
+//		validateExperienceDate(userProfile.getJobs());
+//		validateEducationDate(userProfile.getEducations());
+//		return validationErros;
+//	}
 
 	private boolean ValidateDate(LocalDate localDate) {
 		return localDate.isAfter(LocalDate.now());

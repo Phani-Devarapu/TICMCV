@@ -1,16 +1,15 @@
 package com.mcit.company.models.Models;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table
-public class JobOffer {
+@Getter
+@Setter
+public class JobPositions {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -18,12 +17,12 @@ public class JobOffer {
 	private String jobDescription;
 	private int salary;
 	private String jobType;
-	@ElementCollection(targetClass = String.class)
-	List<String> requiredskills = new ArrayList<>();
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate creationDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate endDate;
+//	@ElementCollection(targetClass = String.class)
+//	List<String> requiredskills = new ArrayList<>();
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	private LocalDate creationDate;
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	private LocalDate endDate;
 	private String companyName;
 	private String companyDescription;
 	private String companyAddress;

@@ -1,13 +1,12 @@
-
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Register</title>
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <style>
             * {
@@ -63,62 +62,48 @@
       .regFormTitle{
         padding: 10px;
       }
+
     </style>
-  </head>
-  <body>
-    <div class="header"><a href="#">Resume portal</a></div>
-    <div class="container-fluid">
-      
-      <!-- <div class="row header">
-        <div class="col-sm-9">
-          <h3>Registration Form</h3>
+</head>
+<body>
+<div class="header"><a href="#">Resume portal</a></div>
+<div class="container-fluid">
+
+    <div class="container  regFormContainer d-flex justify-content-center mt-5">
+        <div class="card" style="width: 55rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); ">
+            <h2 class="regFormTitle">Registration Form</h2>
+            <div class="card-body">
+                <form th:action="@{/registerForm}" method="post" th:object="${RegisterForm}">
+                    <div>
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" th:field="*{firstName}" required>
+                    </div>
+                    <div>
+                        <label>Company Secondary Name</label>
+                        <input type="text" class="form-control" th:field="*{lastName}" required>
+                    </div>
+                    <div>
+                        <label>Email</label>
+                        <input type="email" class="form-control" th:field="*{email}" required>
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="password" class="form-control"  th:field="*{password}" required>
+                    </div>
+
+                    <div>
+                        <label>Company Login Id</label>
+                        <input type="text" class="form-control"  th:field="*{userName}" required>
+                    </div>
+
+                    <div style="padding:10px">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+                    </div>
+
+            </div>
         </div>
-        <div class="col-sm-3 headerButtons">
-          <a class="btn btn-outline-danger" role="button" th:href="@{/}"
-            >Home</a
-          >
-        </div>
-      </div> -->
+    </div>
 
- 
-
-<div class="container  regFormContainer d-flex justify-content-center mt-5">
-<div class="card" style="width: 55rem; box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); ">
-<h2 class="regFormTitle">Registration Form</h2>
-  <div class="card-body">
-<form th:action="@{/registerForm}" method="post" th:object="${RegisterForm}">
-  <div>
-    <label>First Name</label>
-    <input type="text" class="form-control" th:field="*{firstName}" required>
-  </div>
-  <div>
-    <label>Last Name</label>
-    <input type="text" class="form-control" th:field="*{lastName}" required>
-  </div>
-  <div>
-    <label>Email</label>
-    <input type="email" class="form-control" th:field="*{email}" required>
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" class="form-control"  th:field="*{password}" required>
-  </div>
-  
-  <div>
-    <label>User Name</label>
-    <input type="text" class="form-control"  th:field="*{userName}" required>
-  </div>
-  
-  <div style="padding:10px">
-  <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-  </div>
-  
-</form>    
-
-  </div>
 </div>
-</div>
-
-
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.mcit.cvbuilder;
+package com.mcit.cvbuilder.user;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

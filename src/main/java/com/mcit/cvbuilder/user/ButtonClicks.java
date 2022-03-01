@@ -1,11 +1,11 @@
-package com.mcit.cvbuilder;
+package com.mcit.cvbuilder.user;
 
 public class ButtonClicks {
 
 	public boolean isClicked;
 	public boolean isaddNewEducationClicked;
 	public boolean isAddSkillClicked;
-	
+
 	public boolean isAddSkillClicked() {
 		return isAddSkillClicked;
 	}

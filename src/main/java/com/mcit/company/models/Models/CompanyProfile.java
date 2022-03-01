@@ -1,4 +1,4 @@
-package com.mcit.company.models;
+package com.mcit.company.models.Models;
 
 import javax.persistence.*;
 
@@ -18,7 +18,9 @@ public class CompanyProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private int theme;
+    private String companyLoginId;
     private String companyName;
+    private String companySecondaryName;
     private String email;
     private String companyPhone;
     private String designation;
@@ -26,6 +28,6 @@ public class CompanyProfile {
     @OneToMany(cascade = CascadeType.ALL,
         orphanRemoval = true)
     @JoinColumn(name = "job_id")
-    List<JobOffer> jobs = new ArrayList<>();
+    List<JobPositions> jobs = new ArrayList<>();
     
 }
