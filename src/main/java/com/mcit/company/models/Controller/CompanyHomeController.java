@@ -83,7 +83,7 @@ public class CompanyHomeController {
 
     @PostMapping("/addJobs")
     public String addJobOffer(Model model, @ModelAttribute JobPositions newOffer) {
-        System.out.println("vinisha");
+//        System.out.println("vinisha");
         model.addAttribute("newOffer", new JobPositions());
         jobPositionRepository.save(newOffer);
         return "redirect:/company/viewJobs";
@@ -100,23 +100,12 @@ public class CompanyHomeController {
         return "job-list";
     }
 
-    @GetMapping("/delete")
-    public String delete(Model model, Principal principal,  @RequestParam int index) {
-//        String userId = principal.getName();
-        Optional<CompanyProfile> companyProfileOptional = jobPositionRepository.findByCompanyName(principal.getName());
-//        companyProfileOptional .orElseThrow(() -> new RuntimeException("Not found: " + userId));
-        CompanyProfile companyProfile = companyProfileOptional.get();
-//        if ("job".equals(type)) {
-            companyProfile.getJobs().remove(index);
 
-        userProfileRepository.save(companyProfile);
-        this.modifiedCompanyProfile.remove(principal.getName());
-//        this.g(principal);
+    @GetMapping("/delete")
+    public String delete(@RequestParam int jobId){
+
+        jobPositionRepository.deleteById(jobId);
 
         return "redirect:/company/viewJobs";
     }
-
-//    @GetMapping("/editJob"){
-//        public String edit
-//    }
 }

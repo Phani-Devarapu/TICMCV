@@ -45,7 +45,7 @@
         </tr>
 
         <tr>
-            <td colspan='2' style='text-align: center;'><a class="btn btn-outline-danger" th:href="@{'./delete&index=' + ${stat.index}}">Delete</a></td>
+            <td colspan='2' style='text-align: center;'><a class="btn btn-outline-danger" th:href="@{/company/delete(jobId=${jobPosition.id})}">Delete</a></td>
         </tr>
         <tr>
             <td colspan='2' style='text-align: center;'><a class="btn btn-outline-danger" th:href="@{'./edit?type=job&index=' + ${stat.index}}">Edit</a></td>
