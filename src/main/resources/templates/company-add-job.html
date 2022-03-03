@@ -95,14 +95,9 @@
                         <label>Company Phone</label>
                         <input class="form-control" th:field="*{companyPhone}"/>
                     </div>
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label>Summary</label>-->
-                    <!--                        <textarea-->
-                    <!--                                class="form-control"-->
-                    <!--                                th:field="*{summary}"-->
-                    <!--                                rows="4"-->
-                    <!--                        ></textarea>-->
-                    <!--                    </div>-->
+                    <div>
+                        <input type="hidden" th:field="*{id}" />
+                    </div>
                     <input
                             class="btn btn-outline-success profileDetailsButton"
                             type="submit"

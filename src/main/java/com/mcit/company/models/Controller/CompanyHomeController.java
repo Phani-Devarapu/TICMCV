@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -47,16 +48,16 @@ public class CompanyHomeController {
         return "company-home";
     }
 
-    @GetMapping("/companyRegisterForm")
+    @GetMapping("/registerForm")
     public String getCompanyRegisterForm(Model model, RegisterForm registerForm) {
         model.addAttribute("RegisterForm", new UserRegistrationDto());
         return "company-registration";
     }
 
 
-    @PostMapping(path = "/companyRegisterForm")
+    @PostMapping(path = "/registerForm")
     public String submitRegistration(Model model, @ModelAttribute UserRegistrationDto registerForm) {
-        System.out.println("I am heer");
+//        System.out.println("I am heer");
 
         try {
             User savedUser = myUserDetailsService.save(registerForm);
@@ -98,6 +99,15 @@ public class CompanyHomeController {
         model.addAttribute("all", all);
         System.out.println(jobPositionRepository.findAll());
         return "job-list";
+    }
+
+    @GetMapping("/edit")
+    public ModelAndView edit(@RequestParam int jobId ){
+        System.out.println(jobId);
+        ModelAndView mav =new ModelAndView("company-add-job");
+        JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
+        mav.addObject("newOffer",jobPositions);
+        return mav;
     }
 
 

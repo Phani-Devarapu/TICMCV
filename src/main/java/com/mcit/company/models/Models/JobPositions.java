@@ -13,7 +13,8 @@ public class JobPositions {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id=0;
+
 	private String jobTitle;
 	private String jobDescription;
 	private int salary;
