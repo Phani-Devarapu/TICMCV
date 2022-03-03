@@ -22,7 +22,7 @@ public class CompanyProfile {
     private String companyName;
     private String companySecondaryName;
     private String email;
-    private String companyPhone;
+    private int companyPhone;
     private String designation;
 
     @OneToMany(cascade = CascadeType.ALL,

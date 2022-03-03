@@ -20,4 +20,6 @@ public class MapperClass {
     public String companyLoginId;
     public boolean iscompanyLoginId;
 
+//    public CompanyProfile get() {
+//    }
 }
