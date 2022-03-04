@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Profile</title>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+    body {
+      background-color: #d2d2d2;
+    }
+    .headerButtons {
+      float: right !important;
+      padding: 10px;
+    }
+    .header {
+      background-color: #e3f2fd;
+    }
+    .profileDetails {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+    .experienceContainer {
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row header">
+        <div class="col-sm-9">
+            <h1 th:text="${userId} + '\'s Profile'">Profile</h1>
+        </div>
+        <div class="col-sm-3 headerButtons">
+            <a class="btn btn-outline-danger" role="button" th:href="@{/company/home}"
+            >Home</a
+            >
+            <a class="btn btn-outline-danger" role="button" th:href="@{/confirmlogout}"
+            >Logout</a
+            >
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <!-- Centered container Starts -->
+        <div class="col-sm-6">
+            <!-- Personal Details card Starts -->
+            <div class="row card profileDetails">
+                <form
+                        action="#"
+                        th:action="@{/company/addJobs}"
+                        th:object="${newOffer}"
+                        method="post"
+                >
+                    <div class="form-group">
+                        <label>Job Title</label>
+                        <input class="form-control" th:field="*{jobTitle}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea class="form-control" th:field="*{jobDescription}" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Required Skills</label>
+                        <textarea class="form-control" th:field="*{skillsInString}" rows="2" placeholder="Required skills seperated by comma"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Salary</label>
+                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Job Type</label>
+                        <input class="form-control" th:field="*{jobType}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input class="form-control" th:field="*{companyName}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Description</label>
+                        <textarea class="form-control" th:field="*{companyDescription}" rows="2"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Company Address</label>
+                        <input class="form-control" th:field="*{companyAddress}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Hiring Manager Contact</label>
+                        <input class="form-control" th:field="*{companyEmail}"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Hiring Manager Phone</label>
+                        <input class="form-control" th:field="*{companyPhone}"/>
+                    </div>
+                    <div>
+                        <input type="hidden" th:field="*{id}" />
+                    </div>
+                    <input
+                            class="btn btn-outline-success profileDetailsButton btn-block"
+                            type="submit"
+                            value="Update Job Details"
+                    />
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

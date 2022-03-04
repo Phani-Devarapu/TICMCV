@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <title>404 Page Not Found</title>
+    
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: "Caveat", cursive;
+      }
+      body{
+        background-color: #ffcccb;
+      }
+      .header {
+        padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+        background-color: #4267b2;
+        cursor: pointer;
+      }
+      .header a {
+        font-size: 30px;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        margin: 0;
+      }
+      .header:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      }
+      .centerContainer{
+        margin-top: 10%;
+        
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header"><a href="#">Resume portal</a></div>
+    <div class="centerContainer d-flex justify-content-center">
+      <div style="background-color:white;padding:20px;border-radius:10px;margin:10px">
+        <h1>Something went wrong!</h1>
+        <h4 th:text="${errorMessage}"></h4>
+        <a type="button" class="btn btn-primary" style='width:100%;margin-top:20px 'href="/">Go Home</a>
+
+      </div>
+
+    </div>
+
+  </body>
+</html>

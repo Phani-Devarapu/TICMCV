@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #d2d2d2;
+      }
+      .headerButtons {
+        float: right !important;
+        padding: 10px;
+      }
+      .header {
+        background-color: #e3f2fd;
+      }
+      .buttonContainer {
+        margin-top: 10%;
+      }
+      .indButton {
+        width:60%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  color:black!important;
+  padding:30px;
+  font-size:40px;
+  margin-left:20%;
+  background-color: white;
+      }
+      .indButton:hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row header">
+        <div class="col-sm-10">
+          <h1 th:text="${userId} + '\'s Profile'">Profile</h1>
+        </div>
+        <div class="col-sm-2 headerButtons">
+          <a class="btn btn-outline-danger" role="button" th:href="@{/confirmlogout}"
+            >Logout</a
+          >
+        </div>
+      </div>
+      <div class="row buttonContainer">
+        <div class="col-sm-4">
+         <a
+            class="btn indButton my-2 my-sm-0"
+            role="button"
+            th:href="@{/company/addJobs}"
+          >
+            Add Jobs</a
+          >
+        </div>
+        <div class="col-sm-4">
+          <a
+            class="btn indButton my-2 my-sm-0"
+            role="button"
+            th:href="@{'/company/viewJobs'}"
+          >
+            Listed Jobs</a
+          >
+        </div>
+         <div class="col-sm-4">
+          <a
+            class="btn indButton my-2 my-sm-0"
+            role="button"
+            th:href="@{'/company/viewJobs'}"
+          >
+            All Jobs</a
+          >
+        </div>
+      </div>
+      <div class="row">
+      <h5>Metrics</h5>
+      <h6>Total Jobs Posted</h6><span th:text="${metrics.totalPositons}"></span>
+       <h6>Jobs Fulfilled</h6><span th:text="${metrics.fulfilledPositons}"></span>
+        <h6>Open Positions</h6><span th:text="${metrics.openPositoins}"></span>
+      </div>
+    </div>
+  </body>
+</html>
