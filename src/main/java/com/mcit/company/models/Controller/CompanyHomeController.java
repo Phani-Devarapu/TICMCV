@@ -97,8 +97,18 @@ public class CompanyHomeController {
     public String view(Model model) {
         List<JobPositions> all = jobPositionRepository.findAll();
         model.addAttribute("all", all);
-        System.out.println(jobPositionRepository.findAll());
+//        System.out.println(jobPositionRepository.findAll());
         return "job-list";
+    }
+
+    @GetMapping("/viewJobs/{id}")
+    public ModelAndView viewJob(@PathVariable int id){
+
+        ModelAndView modelAndView = new ModelAndView("job-view");
+        JobPositions jobPositions = jobPositionRepository.findById(id).get();
+        modelAndView.addObject("job",jobPositions);
+        return modelAndView;
+
     }
 
     @GetMapping("/edit")
