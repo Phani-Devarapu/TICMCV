@@ -30,10 +30,9 @@ public class Job {
 
 	@ElementCollection(targetClass = String.class)
 	private List<String> responsibilities = new ArrayList();
-
+	
 	@Transient
 	private String summary;
-	
 	
 
 	public String getSummary() {

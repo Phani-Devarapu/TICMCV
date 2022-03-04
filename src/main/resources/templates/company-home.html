@@ -50,7 +50,7 @@
         </div>
       </div>
       <div class="row buttonContainer">
-        <div class="col-sm-6">
+        <div class="col-sm-4">
          <a
             class="btn indButton my-2 my-sm-0"
             role="button"
@@ -59,15 +59,30 @@
             Add Jobs</a
           >
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-4">
           <a
             class="btn indButton my-2 my-sm-0"
             role="button"
             th:href="@{'/company/viewJobs'}"
           >
-            View Jobs</a
+            Listed Jobs</a
           >
         </div>
+         <div class="col-sm-4">
+          <a
+            class="btn indButton my-2 my-sm-0"
+            role="button"
+            th:href="@{'/company/viewJobs'}"
+          >
+            All Jobs</a
+          >
+        </div>
+      </div>
+      <div class="row">
+      <h5>Metrics</h5>
+      <h6>Total Jobs Posted</h6><span th:text="${metrics.totalPositons}"></span>
+       <h6>Jobs Fulfilled</h6><span th:text="${metrics.fulfilledPositons}"></span>
+        <h6>Open Positions</h6><span th:text="${metrics.openPositoins}"></span>
       </div>
     </div>
   </body>

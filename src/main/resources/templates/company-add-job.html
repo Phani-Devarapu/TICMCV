@@ -65,11 +65,15 @@
                     </div>
                     <div class="form-group">
                         <label>Job Description</label>
-                        <input class="form-control" th:field="*{jobDescription}"/>
+                        <textarea class="form-control" th:field="*{jobDescription}" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Required Skills</label>
+                        <textarea class="form-control" th:field="*{skillsInString}" rows="2" placeholder="Required skills seperated by comma"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Salary</label>
-                        <input class="form-control" th:field="*{salary}"/>
+                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}"/>
                     </div>
                     <div class="form-group">
                         <label>Job Type</label>
@@ -81,25 +85,25 @@
                     </div>
                     <div class="form-group">
                         <label>Company Description</label>
-                        <input class="form-control" th:field="*{companyDescription}"/>
+                        <textarea class="form-control" th:field="*{companyDescription}" rows="2"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Company Address</label>
                         <input class="form-control" th:field="*{companyAddress}"/>
                     </div>
                     <div class="form-group">
-                        <label>Company Email</label>
+                        <label>Hiring Manager Contact</label>
                         <input class="form-control" th:field="*{companyEmail}"/>
                     </div>
                     <div class="form-group">
-                        <label>Company Phone</label>
+                        <label>Hiring Manager Phone</label>
                         <input class="form-control" th:field="*{companyPhone}"/>
                     </div>
                     <div>
                         <input type="hidden" th:field="*{id}" />
                     </div>
                     <input
-                            class="btn btn-outline-success profileDetailsButton"
+                            class="btn btn-outline-success profileDetailsButton btn-block"
                             type="submit"
                             value="Update Job Details"
                     />

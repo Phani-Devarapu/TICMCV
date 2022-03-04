@@ -1,5 +1,6 @@
 package com.mcit.company.models.Controller;
 
+import com.mcit.company.models.JobPositionsMetrics;
 import com.mcit.company.models.Models.CompanyProfile;
 import com.mcit.company.models.Models.JobPositions;
 import com.mcit.company.models.Models.MapperClass;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -26,106 +29,115 @@ import java.util.Optional;
 @RequestMapping("/company")
 public class CompanyHomeController {
 
-    @Autowired
-    JobPositionRepository jobPositionRepository;
+	@Autowired
+	JobPositionRepository jobPositionRepository;
 
-    @Autowired
-    MyUserDetailsService myUserDetailsService;
+	@Autowired
+	MyUserDetailsService myUserDetailsService;
 
-    @Autowired
-    MappingRepository mappingRepository;
+	@Autowired
+	MappingRepository mappingRepository;
 
-    @Autowired
-    UserProfileRepository userProfileRepository;
+	@Autowired
+	UserProfileRepository userProfileRepository;
 
-    HashMap<String, CompanyProfile> modifiedCompanyProfile = new HashMap<String, CompanyProfile>();
+	HashMap<String, CompanyProfile> modifiedCompanyProfile = new HashMap<String, CompanyProfile>();
 
-    ButtonClicks buttonClicks = new ButtonClicks();
+	ButtonClicks buttonClicks = new ButtonClicks();
 
-    @GetMapping("/home")
-    public String LandingPage(Principal principal, Model model) {
-        model.addAttribute("companyLoginId", principal.getName());
-        return "company-home";
-    }
+	@GetMapping("/home")
+	public String LandingPage(Principal principal, Model model) {
+		model.addAttribute("companyLoginId", principal.getName());
 
-    @GetMapping("/registerForm")
-    public String getCompanyRegisterForm(Model model, RegisterForm registerForm) {
-        model.addAttribute("RegisterForm", new UserRegistrationDto());
-        return "company-registration";
-    }
+		List<JobPositions> jobPositions = jobPositionRepository.findByCompanyId(principal.getName());
 
+		long fulFilledPositions = jobPositions.stream().filter(job -> job.isFulfilled()).count();
 
-    @PostMapping(path = "/registerForm")
-    public String submitRegistration(Model model, @ModelAttribute UserRegistrationDto registerForm) {
-//        System.out.println("I am heer");
+		JobPositionsMetrics jpm = new JobPositionsMetrics((jobPositions.size()), fulFilledPositions,
+				jobPositions.size() - fulFilledPositions);
+		
+		System.out.println(jpm.toString());
+		model.addAttribute("metrics", jpm);
+		return "company-home";
+	}
 
-        try {
-            User savedUser = myUserDetailsService.save(registerForm);
-            MapperClass mapping = new MapperClass();
+	@GetMapping("/registerForm")
+	public String getCompanyRegisterForm(Model model, RegisterForm registerForm) {
+		model.addAttribute("RegisterForm", new UserRegistrationDto());
+		return "company-registration";
+	}
 
-            mapping.setCompanyLoginId(registerForm.getUserName());
-//            System.out.println(registerForm.getUserName());
-            mapping.setIscompanyLoginId(true);
-//            System.out.println(mapping.toString());
-            mappingRepository.save(mapping);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-            model.addAttribute("errorMessage", "CompanyName already exists Please Try Again");
-            return "error";
-        }
+	@PostMapping(path = "/registerForm")
+	public String submitRegistration(Model model, @ModelAttribute UserRegistrationDto registerForm) {
 
-        return "redirect:/login";
-    }
-    @GetMapping("/addJobs")
-    public String addJobOffer(Model model) {
-        model.addAttribute("newOffer", new JobPositions());
-        return "company-add-job";
-    }
+		try {
+			User savedUser = myUserDetailsService.save(registerForm);
+			MapperClass mapping = new MapperClass();
 
-    @PostMapping("/addJobs")
-    public String addJobOffer(Model model, @ModelAttribute JobPositions newOffer) {
-//        System.out.println("vinisha");
-        model.addAttribute("newOffer", new JobPositions());
-        jobPositionRepository.save(newOffer);
-        return "redirect:/company/viewJobs";
-    }
+			mapping.setCompanyLoginId(registerForm.getUserName());
+			mapping.setIscompanyLoginId(true);
+			mappingRepository.save(mapping);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			model.addAttribute("errorMessage", "CompanyName already exists Please Try Again");
+			return "error";
+		}
 
+		return "redirect:/login";
+	}
 
+	@GetMapping("/addJobs")
+	public String addJobOffer(Model model, Principal principal) {
+		JobPositions jobPositions = new JobPositions();
+		jobPositions.setCompanyName(principal.getName());
+		model.addAttribute("newOffer", jobPositions);
+		return "company-add-job";
+	}
 
+	@PostMapping("/addJobs")
+	public String addJobOffer(Model model, @ModelAttribute JobPositions newOffer, Principal principal) {
 
-    @GetMapping("/viewJobs")
-    public String view(Model model) {
-        List<JobPositions> all = jobPositionRepository.findAll();
-        model.addAttribute("all", all);
-//        System.out.println(jobPositionRepository.findAll());
-        return "job-list";
-    }
+		model.addAttribute("newOffer", new JobPositions());
+		newOffer.setJobPostedTime(LocalDateTime.now());
+		String[] split = newOffer.getSkillsInString().split(",");
+		newOffer.setRequiredskills(Arrays.asList(split));
+		newOffer.setFulfilled(false);
+		newOffer.setCompanyId(principal.getName());
+		jobPositionRepository.save(newOffer);
+		return "redirect:/company/viewJobs";
+	}
 
-    @GetMapping("/viewJobs/{id}")
-    public ModelAndView viewJob(@PathVariable int id){
+	@GetMapping("/viewJobs")
+	public String view(Model model) {
+		List<JobPositions> all = jobPositionRepository.findAll();
+		model.addAttribute("all", all);
+		return "job-list";
+	}
 
-        ModelAndView modelAndView = new ModelAndView("job-view");
-        JobPositions jobPositions = jobPositionRepository.findById(id).get();
-        modelAndView.addObject("job",jobPositions);
-        return modelAndView;
+	@GetMapping("/viewJobs/{id}")
+	public ModelAndView viewJob(@PathVariable int id) {
 
-    }
+		ModelAndView modelAndView = new ModelAndView("job-view");
+		JobPositions jobPositions = jobPositionRepository.findById(id).get();
+		modelAndView.addObject("job", jobPositions);
+		return modelAndView;
 
-    @GetMapping("/edit")
-    public ModelAndView edit(@RequestParam int jobId ){
-        System.out.println(jobId);
-        ModelAndView mav =new ModelAndView("company-add-job");
-        JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
-        mav.addObject("newOffer",jobPositions);
-        return mav;
-    }
+	}
 
+	@GetMapping("/edit")
+	public ModelAndView edit(@RequestParam int jobId) {
+		System.out.println(jobId);
+		ModelAndView mav = new ModelAndView("company-add-job");
+		JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
+		mav.addObject("newOffer", jobPositions);
+		return mav;
+	}
 
-    @GetMapping("/delete")
-    public String delete(@RequestParam int jobId){
+	@GetMapping("/delete")
+	public String delete(@RequestParam int jobId) {
 
-        jobPositionRepository.deleteById(jobId);
+		jobPositionRepository.deleteById(jobId);
 
-        return "redirect:/company/viewJobs";
-    }
+		return "redirect:/company/viewJobs";
+	}
 }
