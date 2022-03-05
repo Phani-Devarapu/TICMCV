@@ -71,33 +71,33 @@
           <a
             class="btn indButton"
             role="button"
-            th:href="@{'/company/viewJobs'}"
+            th:href="@{'/company/viewJobs?filter=YES'}"
             style="
               background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
               color: white;
             "
           >
-            Listed Jobs</a
+            List Jobs</a
           >
         </div>
         <div class="col-sm-4">
           <a
             class="btn indButton"
             role="button"
-            th:href="@{'/company/viewJobs'}"
+            th:href="@{'/company/viewJobs?filter=NO'}"
             style="
               background-image: linear-gradient(25deg, #d64c7f, #ee4758 50%);
               color: white;
             "
           >
-            All Jobs</a
+            View All Jobs</a
           >
         </div>
       </div>
       <div class="row">
         <div class="col-sm d-flex justify-content-center">
           <div style="width: 50%; background-color: white;margin-top:30px;border-radius:10px;padding:20px">
-            <h2><center>Metrics</center></h2>
+            <h2><center>Stats</center></h2>
             <table class="table table-bordered">
               <tr>
                 <td>Total Jobs Posted</td>
@@ -109,6 +109,14 @@
               </tr>
               <tr>
                 <td>Open Positions</td>
+                <td th:text="${metrics.openPositoins}"></td>
+              </tr>
+              <tr>
+                <td>Total Jobs Posted by your enterprise: <span th:text="${userId}" style="font-weight:bold"></span></td>
+                <td th:text="${metrics.openPositoins}"></td>
+              </tr>
+              <tr>
+                <td>Open Positions in your enterprise:  <span th:text="${userId}" style="font-weight:bold"></span></td>
                 <td th:text="${metrics.openPositoins}"></td>
               </tr>
             </table>

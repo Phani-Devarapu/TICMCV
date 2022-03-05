@@ -61,23 +61,36 @@
                 >
                     <div class="form-group">
                         <label>Job Title</label>
-                        <input class="form-control" th:field="*{jobTitle}"/>
+                        <input class="form-control" th:field="*{jobTitle}" required/>
                     </div>
                     <div class="form-group">
                         <label>Job Description</label>
-                        <textarea class="form-control" th:field="*{jobDescription}" rows="4"></textarea>
+                        <textarea class="form-control" th:field="*{jobDescription}" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
                         <label>Required Skills</label>
                         <textarea class="form-control" th:field="*{skillsInString}" rows="2" placeholder="Required skills seperated by comma"></textarea>
                     </div>
                     <div class="form-group">
+                        <label>Required Experience</label>
+                        <input type="number" placeholder="Experience Required" class="form-control" th:field="*{requiredExperience}" required/>
+                    </div>
+                    <div class="form-group">
                         <label>Salary</label>
-                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}"/>
+                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}" required/>
+                        
                     </div>
                     <div class="form-group">
                         <label>Job Type</label>
-                        <input class="form-control" th:field="*{jobType}"/>
+                         <select th:field="*{jobType}">
+            <option
+            th:each="type : ${jobTypes}"
+            th:value="${type}"
+            th:text="${type}"
+            ></option>
+          </select>
+          
+<!--                         <input class="form-control" th:field="*{jobType}"/> -->
                     </div>
                     <div class="form-group">
                         <label>Company Name</label>
@@ -89,15 +102,15 @@
                     </div>
                     <div class="form-group">
                         <label>Company Address</label>
-                        <input class="form-control" th:field="*{companyAddress}"/>
+                        <input class="form-control" th:field="*{companyAddress}" required/>
                     </div>
                     <div class="form-group">
                         <label>Hiring Manager Contact</label>
-                        <input class="form-control" th:field="*{companyEmail}"/>
+                        <input class="form-control" th:field="*{companyEmail}" required/>
                     </div>
                     <div class="form-group">
                         <label>Hiring Manager Phone</label>
-                        <input class="form-control" th:field="*{companyPhone}"/>
+                        <input class="form-control" th:field="*{companyPhone}" required/>
                     </div>
                     <div>
                         <input type="hidden" th:field="*{id}" />
