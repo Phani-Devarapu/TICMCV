@@ -4,6 +4,7 @@ import com.mcit.company.models.JobPositionsMetrics;
 import com.mcit.company.models.Models.CompanyProfile;
 import com.mcit.company.models.Models.JobPositions;
 import com.mcit.company.models.Models.MapperClass;
+import com.mcit.company.models.Repository.CompanyProfileRepository;
 import com.mcit.company.models.Repository.JobPositionRepository;
 import com.mcit.company.models.Repository.MappingRepository;
 import com.mcit.cvbuilder.user.ButtonClicks;
@@ -29,8 +30,8 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/company")
 public class CompanyHomeController {
-	
-	private final List<String> JOB_TYPES = List.of("Full Time","Contract","Permanent","Temporary");
+
+	private final List<String> JOB_TYPES = List.of("Full Time", "Contract", "Permanent", "Temporary");
 
 	@Autowired
 	JobPositionRepository jobPositionRepository;
@@ -42,26 +43,43 @@ public class CompanyHomeController {
 	MappingRepository mappingRepository;
 
 	@Autowired
+	CompanyProfileRepository companyProfileRepository;
+
+	@Autowired
 	UserProfileRepository userProfileRepository;
 
 	HashMap<String, CompanyProfile> modifiedCompanyProfile = new HashMap<String, CompanyProfile>();
 
-	
-
 	@GetMapping("/home")
 	public String LandingPage(Principal principal, Model model) {
+
+		List<JobPositions> allJobPositions = getAllJobPositions();
+
+		long fulFilledPositions = allJobPositions.stream().filter(job -> job.isFulfilled()).count();
+
+		List<JobPositions> filterJobPositions = FilterJobPositions(allJobPositions, principal.getName());
+
+		long openPositionsByEnterprise = filterJobPositions.stream().filter(job -> !job.isFulfilled()).count();
+
+		JobPositionsMetrics jpm = new JobPositionsMetrics((allJobPositions.size()), fulFilledPositions,
+				allJobPositions.size() - fulFilledPositions, Long.valueOf(filterJobPositions.size()),
+				openPositionsByEnterprise);
 		
+		
+
 		model.addAttribute("userId", principal.getName());
-
-		List<JobPositions> jobPositions = jobPositionRepository.findByCompanyId(principal.getName());
-
-		long fulFilledPositions = jobPositions.stream().filter(job -> job.isFulfilled()).count();
-
-		JobPositionsMetrics jpm = new JobPositionsMetrics((jobPositions.size()), fulFilledPositions,
-				jobPositions.size() - fulFilledPositions);
-
 		model.addAttribute("metrics", jpm);
 		return "company-home";
+	}
+
+	private List<JobPositions> getAllJobPositions() {
+		return jobPositionRepository.findAll();
+	}
+
+	private List<JobPositions> FilterJobPositions(List<JobPositions> jobPositions, String filter) {
+		return jobPositions.stream().filter(position -> position.getCompanyId().equals(filter))
+				.collect(Collectors.toList());
+
 	}
 
 	@GetMapping("/registerForm")
@@ -75,11 +93,22 @@ public class CompanyHomeController {
 
 		try {
 			User savedUser = myUserDetailsService.save(registerForm);
-			MapperClass mapping = new MapperClass();
 
+			MapperClass mapping = new MapperClass();
 			mapping.setCompanyLoginId(registerForm.getUserName());
 			mapping.setIscompanyLoginId(true);
+
 			mappingRepository.save(mapping);
+
+			CompanyProfile companyProfile = new CompanyProfile();
+
+			companyProfile.setCompanyId(registerForm.getUserName());
+			companyProfile.setCompanyName(registerForm.getFirstName());
+			companyProfile.setEmail(registerForm.getEmail());
+			companyProfile.setCompanySecondaryName(registerForm.getLastName());
+
+			companyProfileRepository.save(companyProfile);
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 			model.addAttribute("errorMessage", "CompanyName already exists Please Try Again");
@@ -91,9 +120,14 @@ public class CompanyHomeController {
 
 	@GetMapping("/addJobs")
 	public String addJobOffer(Model model, Principal principal) {
-		
+
 		JobPositions jobPositions = new JobPositions();
-		jobPositions.setCompanyName(principal.getName());
+		
+		CompanyProfile companyProfile = companyProfileRepository.findByCompanyId(principal.getName());
+		
+		jobPositions.setCompanyName(companyProfile.getCompanyName() + " ("+ companyProfile.getCompanySecondaryName() + ")");
+		jobPositions.setCompanyEmail(companyProfile.getEmail());
+		
 		model.addAttribute("newOffer", jobPositions);
 		model.addAttribute("jobTypes", JOB_TYPES);
 		return "company-add-job";
@@ -129,20 +163,20 @@ public class CompanyHomeController {
 		return "job-list";
 	}
 
-	@GetMapping("/viewJobs/{id}")
-	public ModelAndView viewJob(@PathVariable int id) {
-
-		ModelAndView modelAndView = new ModelAndView("job-view");
-		JobPositions jobPositions = jobPositionRepository.findById(id).get();
-		modelAndView.addObject("job", jobPositions);
-		return modelAndView;
-
-	}
-
 	@GetMapping("/edit")
 	public ModelAndView edit(@RequestParam int jobId) {
 		System.out.println(jobId);
 		ModelAndView mav = new ModelAndView("company-add-job");
+		JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
+		mav.addObject("newOffer", jobPositions);
+		mav.addObject("jobTypes", JOB_TYPES);
+		return mav;
+	}
+	
+	@GetMapping("/view/job")
+	public ModelAndView viewJob(@RequestParam int jobId) {
+		System.out.println(jobId);
+		ModelAndView mav = new ModelAndView("company-view-job");
 		JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
 		mav.addObject("newOffer", jobPositions);
 		mav.addObject("jobTypes", JOB_TYPES);

@@ -17,13 +17,13 @@ public class CompanyProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int theme;
-    private String companyLoginId;
+    
+    private String companyId;
     private String companyName;
     private String companySecondaryName;
     private String email;
     private int companyPhone;
-    private String designation;
+ 
 
     @OneToMany(cascade = CascadeType.ALL,
         orphanRemoval = true)
