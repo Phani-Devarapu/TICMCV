@@ -8,5 +8,7 @@ public class JobPositionsMetrics {
 	int totalPositons;
 	Long fulfilledPositons;
 	Long openPositoins;
+	Long totalPositionsByEnterprise;
+	Long openPositionsInEnterprise;
 
 }

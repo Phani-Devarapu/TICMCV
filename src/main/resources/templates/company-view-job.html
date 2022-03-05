@@ -61,28 +61,28 @@
                 >
                     <div class="form-group">
                         <label>Job Title</label>
-                        <input class="form-control" th:field="*{jobTitle}" required/>
+                        <input class="form-control" th:field="*{jobTitle}" disabled="disabled"/>
                     </div>
                     <div class="form-group">
                         <label>Job Description</label>
-                        <textarea class="form-control" th:field="*{jobDescription}" rows="4" required></textarea>
+                        <textarea class="form-control" th:field="*{jobDescription}" rows="4" disabled="disabled"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Required Skills</label>
-                        <textarea class="form-control" th:field="*{skillsInString}" rows="2" placeholder="Required skills seperated by comma"></textarea>
+                        <textarea class="form-control" th:field="*{skillsInString}" rows="2" placeholder="Required skills seperated by comma" disabled="disabled"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Required Experience</label>
-                        <input type="number" placeholder="Experience in Years" class="form-control" th:field="*{requiredExperience}" required/>
+                        <input type="number" placeholder="Experience in Years" class="form-control" th:field="*{requiredExperience}" disabled="disabled"/>
                     </div>
                     <div class="form-group">
                         <label>Salary</label>
-                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}" required/>
+                        <input type="number" placeholder="Salary in CAD" class="form-control" th:field="*{salary}" disabled="disabled"/>
                         
                     </div>
                     <div class="form-group">
                         <label>Job Type</label>
-                         <select th:field="*{jobType}">
+                         <select th:field="*{jobType}" disabled="disabled">
             <option
             th:each="type : ${jobTypes}"
             th:value="${type}"
@@ -90,7 +90,6 @@
             ></option>
           </select>
           
-<!--                         <input class="form-control" th:field="*{jobType}"/> -->
                     </div>
                     <div class="form-group">
                         <label>Company Name</label>
@@ -98,11 +97,11 @@
                     </div>
                     <div class="form-group">
                         <label>Company Description</label>
-                        <textarea class="form-control" th:field="*{companyDescription}" rows="2"></textarea>
+                        <textarea class="form-control" th:field="*{companyDescription}" rows="2" disabled="disabled"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Company Address</label>
-                        <input class="form-control" th:field="*{companyAddress}" required/>
+                        <input class="form-control" th:field="*{companyAddress}" disabled="disabled"/>
                     </div>
                     <div class="form-group">
                         <label>Hiring Manager Contact</label>
@@ -110,16 +109,16 @@
                     </div>
                     <div class="form-group">
                         <label>Hiring Manager Phone</label>
-                        <input class="form-control" th:field="*{companyPhone}" required/>
+                        <input class="form-control" th:field="*{companyPhone}" disabled="disabled"/>
                     </div>
                     <div>
                         <input type="hidden" th:field="*{id}" />
                     </div>
-                    <input
-                            class="btn btn-outline-success profileDetailsButton btn-block"
-                            type="submit"
-                            value="Update Job Details"
-                    />
+<!--                     <input -->
+<!--                             class="btn btn-outline-success profileDetailsButton btn-block" -->
+<!--                             type="submit" -->
+<!--                             value="Update Job Details" disabled="disabled" -->
+<!--                     /> -->
                 </form>
             </div>
 
