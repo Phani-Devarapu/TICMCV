@@ -11,6 +11,8 @@
     <style>
       body {
         background-color: #d2d2d2;
+
+        box-sizing: border-box;
       }
       .headerButtons {
         float: right !important;
@@ -20,20 +22,19 @@
         background-color: #e3f2fd;
       }
       .buttonContainer {
-        margin-top: 10%;
+        margin-top: 30px;
       }
       .indButton {
-        width:60%;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  color:black!important;
-  padding:30px;
-  font-size:40px;
-  margin-left:20%;
-  background-color: white;
+        width: 90%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        /* color: black !important; */
+        padding: 30px;
+        font-size: 30px;
+        /* background-color: white; */
+        margin: 10px;
       }
-      .indButton:hover{
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-
+      .indButton:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -44,45 +45,76 @@
           <h1 th:text="${userId} + '\'s Profile'">Profile</h1>
         </div>
         <div class="col-sm-2 headerButtons">
-          <a class="btn btn-outline-danger" role="button" th:href="@{/confirmlogout}"
+          <a
+            class="btn btn-outline-danger"
+            role="button"
+            th:href="@{/confirmlogout}"
             >Logout</a
           >
         </div>
       </div>
       <div class="row buttonContainer">
         <div class="col-sm-4">
-         <a
-            class="btn indButton my-2 my-sm-0"
+          <a
+            class="btn indButton"
             role="button"
             th:href="@{/company/addJobs}"
+            style="
+              background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+              color: white;
+            "
           >
             Add Jobs</a
           >
         </div>
         <div class="col-sm-4">
           <a
-            class="btn indButton my-2 my-sm-0"
+            class="btn indButton"
             role="button"
             th:href="@{'/company/viewJobs'}"
+            style="
+              background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+              color: white;
+            "
           >
             Listed Jobs</a
           >
         </div>
-         <div class="col-sm-4">
+        <div class="col-sm-4">
           <a
-            class="btn indButton my-2 my-sm-0"
+            class="btn indButton"
             role="button"
             th:href="@{'/company/viewJobs'}"
+            style="
+              background-image: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+              color: white;
+            "
           >
             All Jobs</a
           >
         </div>
       </div>
       <div class="row">
-      <h5>Metrics</h5>
-      <h6>Total Jobs Posted</h6><span th:text="${metrics.totalPositons}"></span>
-       <h6>Jobs Fulfilled</h6><span th:text="${metrics.fulfilledPositons}"></span>
-        <h6>Open Positions</h6><span th:text="${metrics.openPositoins}"></span>
+        <div class="col-sm d-flex justify-content-center">
+          <div style="width: 50%; background-color: white;margin-top:30px;border-radius:10px;padding:20px">
+            <h2><center>Metrics</center></h2>
+            <table class="table table-bordered">
+              <tr>
+                <td>Total Jobs Posted</td>
+                <td th:text="${metrics.totalPositons}"></td>
+              </tr>
+              <tr>
+                <td>Jobs Fulfilled</td>
+                <td th:text="${metrics.fulfilledPositons}"></td>
+              </tr>
+              <tr>
+                <td>Open Positions</td>
+                <td th:text="${metrics.openPositoins}"></td>
+              </tr>
+            </table>
+           
+          </div>
+        </div>
       </div>
     </div>
   </body>
