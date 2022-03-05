@@ -14,6 +14,7 @@
       * {
         padding: 0;
         margin: 0;
+        box-sizing: border-box;
       }
       body {
         background-color: #d2d2d2;
@@ -26,11 +27,11 @@
         background-color: #e3f2fd;
         margin-bottom: 30px;
       }
-      .tableContainer{
-          background-color: white;
-          width: 50%;
-          border-radius:10px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      .tableContainer {
+        background-color: white;
+
+        border-radius: 10px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       }
     </style>
   </head>
@@ -45,117 +46,90 @@
           <a class="btn btn-outline-danger" role="button">Logout</a>
         </div>
       </div>
-      <div class="d-flex justify-content-center">
-        <table class="table table-bordered tableContainer">
-          <div th:each="jobPosition, stat: *{all}">
-            <tr>
-              <td>Job Title</td>
-              <td>
-                <div
-                  class="form-control"
-                  th:text="${jobPosition.jobTitle}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Job Description</td>
-              <td>
-                <div
-                  class="form-control"
-                  th:text="${jobPosition.jobDescription}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Salary</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.salary}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Job Type</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.jobType}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Company Name</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.companyName}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Company Description</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.companyDescription}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Company Address</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.companyAddress}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Company Email</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.companyEmail}"
-                ></div>
-              </td>
-            </tr>
-            <tr>
-              <td>Company Phone</td>
-              <td>
-                <div
-                  type="date"
-                  class="form-control"
-                  th:text="${jobPosition.companyPhone}"
-                ></div>
-              </td>
-            </tr>
+      <div class="row">
+        <div class="col-sm-4">
+          <div
+            th:each="jobPosition, stat: *{all}"
+            style="background-color: white; padding: 10px; margin: 10px"
+          >
+            <div class="form-control" th:text="${jobPosition.jobTitle}"></div>
 
-            <tr>
-              <td style="text-align: center">
-                <a
-                  class="btn btn-outline-danger" style="width:100%"
-                  th:href="@{/company/delete(jobId=${jobPosition.id})}"
-                  >Delete</a
-                >
-              </td>
-              <td style="text-align: center">
-                <a
-                  class="btn btn-outline-success" style="width:100%"
-                  th:href="@{/company/edit(jobId=${jobPosition.id})}"
-                  >Edit</a
-                >
-              </td>
-            </tr>
-            <tr></tr>
+            <div
+              class="form-control"
+              th:text="${jobPosition.jobDescription}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.salary}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.jobType}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.companyName}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.companyDescription}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.companyAddress}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.companyEmail}"
+            ></div>
+
+            <div
+              type="date"
+              class="form-control"
+              th:text="${jobPosition.companyPhone}"
+            ></div>
+            <div
+              style="
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+              "
+            >
+              <a
+                class="btn btn-outline-success"
+                style="min-width: 30%"
+                th:href="@{/company/edit(jobId=${jobPosition.id})}"
+                >Edit</a
+              >
+              <a
+                class="btn btn-outline-info"
+                style="min-width: 30%"
+                th:href="@{/company/edit(jobId=${jobPosition.id})}"
+                >View</a
+              >
+              <a
+                class="btn btn-outline-danger"
+                style="min-width: 30%"
+                th:href="@{/company/delete(jobId=${jobPosition.id})}"
+                >Delete</a
+              >
+            </div>
           </div>
-        </table>
+        </div>
+
+        <!-- Test Data -->
       </div>
     </div>
   </body>
