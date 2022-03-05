@@ -42,8 +42,11 @@
           <h1>Jobs List</h1>
         </div>
         <div class="col-sm-2 headerButtons">
-          <!-- Add Referencr to the Logout Button -->
-          <a class="btn btn-outline-danger" role="button">Logout</a>
+         <a class="btn btn-outline-danger" role="button" th:href="@{/home}"
+            >Home</a
+            >
+         <a class="btn btn-outline-danger" role="button" th:href="@{/confirmlogout}"
+        >Logout</a>
         </div>
       </div>
       <div class="row">
@@ -107,24 +110,27 @@
                 justify-content: space-between;
               "
             >
-              <a
+             <div th:if="${jobPosition.companyId}==${userId}">
+             <a
                 class="btn btn-outline-success"
                 style="min-width: 30%"
                 th:href="@{/company/edit(jobId=${jobPosition.id})}"
-                >Edit</a
+                >Edit</a>
+                
+                 <a
+                class="btn btn-outline-danger"
+                style="min-width: 30%"
+                th:href="@{/company/delete(jobId=${jobPosition.id})}"
+                >Delete</a
               >
+             </div>
               <a
                 class="btn btn-outline-info"
                 style="min-width: 30%"
                 th:href="@{/company/edit(jobId=${jobPosition.id})}"
                 >View</a
               >
-              <a
-                class="btn btn-outline-danger"
-                style="min-width: 30%"
-                th:href="@{/company/delete(jobId=${jobPosition.id})}"
-                >Delete</a
-              >
+            
             </div>
           </div>
         </div>

@@ -24,10 +24,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/company")
 public class CompanyHomeController {
+	
+	private final List<String> JOB_TYPES = List.of("Full Time","Contract","Permanent","Temporary");
 
 	@Autowired
 	JobPositionRepository jobPositionRepository;
@@ -43,11 +46,12 @@ public class CompanyHomeController {
 
 	HashMap<String, CompanyProfile> modifiedCompanyProfile = new HashMap<String, CompanyProfile>();
 
-	ButtonClicks buttonClicks = new ButtonClicks();
+	
 
 	@GetMapping("/home")
 	public String LandingPage(Principal principal, Model model) {
-		model.addAttribute("companyLoginId", principal.getName());
+		
+		model.addAttribute("userId", principal.getName());
 
 		List<JobPositions> jobPositions = jobPositionRepository.findByCompanyId(principal.getName());
 
@@ -55,8 +59,7 @@ public class CompanyHomeController {
 
 		JobPositionsMetrics jpm = new JobPositionsMetrics((jobPositions.size()), fulFilledPositions,
 				jobPositions.size() - fulFilledPositions);
-		
-		System.out.println(jpm.toString());
+
 		model.addAttribute("metrics", jpm);
 		return "company-home";
 	}
@@ -88,9 +91,11 @@ public class CompanyHomeController {
 
 	@GetMapping("/addJobs")
 	public String addJobOffer(Model model, Principal principal) {
+		
 		JobPositions jobPositions = new JobPositions();
 		jobPositions.setCompanyName(principal.getName());
 		model.addAttribute("newOffer", jobPositions);
+		model.addAttribute("jobTypes", JOB_TYPES);
 		return "company-add-job";
 	}
 
@@ -104,13 +109,23 @@ public class CompanyHomeController {
 		newOffer.setFulfilled(false);
 		newOffer.setCompanyId(principal.getName());
 		jobPositionRepository.save(newOffer);
-		return "redirect:/company/viewJobs";
+		return "redirect:/company/viewJobs?filter=YES";
 	}
 
 	@GetMapping("/viewJobs")
-	public String view(Model model) {
+	public String view(Model model, Principal principal, @RequestParam(required = false) String filter) {
 		List<JobPositions> all = jobPositionRepository.findAll();
-		model.addAttribute("all", all);
+
+		if (filter.equals("YES")) {
+			List<JobPositions> filteredList = all.stream()
+					.filter(position -> position.getCompanyId().equals(principal.getName()))
+					.collect(Collectors.toList());
+			model.addAttribute("all", filteredList);
+		} else {
+			model.addAttribute("all", all);
+		}
+
+		model.addAttribute("userId", principal.getName());
 		return "job-list";
 	}
 
@@ -130,6 +145,7 @@ public class CompanyHomeController {
 		ModelAndView mav = new ModelAndView("company-add-job");
 		JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
 		mav.addObject("newOffer", jobPositions);
+		mav.addObject("jobTypes", JOB_TYPES);
 		return mav;
 	}
 
@@ -138,6 +154,6 @@ public class CompanyHomeController {
 
 		jobPositionRepository.deleteById(jobId);
 
-		return "redirect:/company/viewJobs";
+		return "redirect:/company/viewJobs?filter=YES";
 	}
 }

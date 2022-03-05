@@ -45,7 +45,7 @@ public class HomeController {
 
         MapperClass byCompanyName = mappingRepository.findBycompanyLoginId(principal.getName());
         if (byCompanyName != null) {
-            return "company-home";
+            return "redirect:/company/home";
         } else {
             return "home";
         }
@@ -77,7 +77,14 @@ public class HomeController {
     @GetMapping(path = "/registerForm")
     public String getRegisterForm(Model model, RegisterForm registerForm) {
 
-        model.addAttribute("RegisterForm", new UserRegistrationDto());
+       // model.addAttribute("RegisterForm", new UserRegistrationDto());
+        return "registrationSubs";
+    }
+    
+    @GetMapping(path = "user/registerForm")
+    public String getUserRegisterForm(Model model, RegisterForm registerForm) {
+
+       model.addAttribute("RegisterForm", new UserRegistrationDto());
         return "registration";
     }
 

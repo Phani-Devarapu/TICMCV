@@ -31,6 +31,8 @@ public class JobPositions {
 
 	@Transient
 	private String skillsInString;
+	
+	private String requiredExperience;
 
 	private LocalDateTime jobPostedTime;
 	private boolean isFulfilled;
