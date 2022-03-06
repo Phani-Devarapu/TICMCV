@@ -77,17 +77,18 @@ body {
 					<span style='
 					animation: 1s ease-out 0s 1 slideInFromLeft;
 
-					float:right;background-color:#d2d2d2;border-radius: 10%;padding:0px 5px'>7 years</span>
+					float:right;background-color:#d2d2d2;border-radius: 10%;padding:0px 5px'><span th:text="${jobPosition.requiredExperience}"></span> years</span>
 
 					<h2  th:text="${jobPosition.jobTitle}"></h2>
 					
+					
+					<div type="date" th:text="${jobPosition.companyName}" style="font-weight: 600;font-style: italic"></div>
+					
 					<div th:text="${jobPosition.jobDescription}"></div>
 
-					<div type="date" th:text="${jobPosition.salary}"></div>
+					<div type="date" th:text="${'$ '+ jobPosition.salary + ' CAD'}" style="font-weight: 600"></div>
 
-					<div type="date" th:text="${jobPosition.jobType}"></div>
-
-					<div type="date" th:text="${jobPosition.companyName}"></div>
+					<div type="date" th:text="${jobPosition.jobType + ' Position'}"></div>
 
 					<div type="date" th:text="${jobPosition.skillsInString}"></div>
 
