@@ -36,6 +36,9 @@
       .indButton:hover {
         box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
       }
+      .badge{
+      background-color:#d2d2d2;text-align:center;border-radius:10%;margin:0px auto;
+      font-size:20px}
     </style>
   </head>
   <body>
@@ -101,23 +104,31 @@
             <table class="table table-bordered">
               <tr>
                 <td>Total Jobs Posted</td>
-                <td th:text="${metrics.totalPositons}"></td>
+                <td><div class='badge' th:text="${metrics.totalPositons}"></div></td>
               </tr>
               <tr>
                 <td>Jobs Fulfilled</td>
-                <td th:text="${metrics.fulfilledPositons}"></td>
+                <td >
+                  <div class='badge' th:text="${metrics.fulfilledPositons}"></div>
+                </td>
               </tr>
               <tr>
                 <td>Open Positions</td>
-                <td th:text="${metrics.openPositoins}"></td>
+                <td >
+                  <div class='badge' th:text="${metrics.openPositoins}"></div>
+                </td>
               </tr>
               <tr>
                 <td>Total Jobs Posted by your enterprise: <span th:text="${userId}" style="font-weight:bold"></span></td>
-                <td th:text="${metrics.totalPositionsByEnterprise}"></td>
+                <td >
+                  <div th:text="${metrics.totalPositionsByEnterprise}" class='badge'></div>
+                </td>
               </tr>
               <tr>
                 <td>Open Positions in your enterprise:  <span th:text="${userId}" style="font-weight:bold"></span></td>
-                <td th:text="${metrics.openPositionsInEnterprise}"></td>
+                <td >
+                  <div th:text="${metrics.openPositionsInEnterprise}" class='badge'></div>
+                </td>
               </tr>
             </table>
            
