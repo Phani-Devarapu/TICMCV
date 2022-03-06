@@ -1,9 +1,9 @@
 package com.mcit.company.models.Controller;
 
 import com.mcit.company.models.JobPositionsMetrics;
-import com.mcit.company.models.Models.CompanyProfile;
-import com.mcit.company.models.Models.JobPositions;
-import com.mcit.company.models.Models.MapperClass;
+import com.mcit.company.models.CompanyProfile;
+import com.mcit.company.models.JobPositions;
+import com.mcit.company.models.MapperClass;
 import com.mcit.company.models.Repository.CompanyProfileRepository;
 import com.mcit.company.models.Repository.JobPositionRepository;
 import com.mcit.company.models.Repository.MappingRepository;

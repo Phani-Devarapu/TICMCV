@@ -1,7 +1,7 @@
 package com.mcit.company.models.Repository;
 
-import com.mcit.company.models.Models.CompanyProfile;
-import com.mcit.company.models.Models.JobPositions;
+import com.mcit.company.models.CompanyProfile;
+import com.mcit.company.models.JobPositions;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

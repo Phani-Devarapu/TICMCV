@@ -1,4 +1,4 @@
-package com.mcit.company.models.Models;
+package com.mcit.company.models;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
