@@ -138,10 +138,15 @@ public class CompanyHomeController {
 
 		model.addAttribute("newOffer", new JobPositions());
 		newOffer.setJobPostedTime(LocalDateTime.now());
+		
 		String[] split = newOffer.getSkillsInString().split(",");
 		newOffer.setRequiredskills(Arrays.asList(split));
 		newOffer.setFulfilled(false);
 		newOffer.setCompanyId(principal.getName());
+	
+		System.out.println("I am here");
+		System.out.println(newOffer.toString());
+		
 		jobPositionRepository.save(newOffer);
 		return "redirect:/company/viewJobs?filter=YES";
 	}
@@ -178,6 +183,8 @@ public class CompanyHomeController {
 		System.out.println(jobId);
 		ModelAndView mav = new ModelAndView("company-view-job");
 		JobPositions jobPositions = jobPositionRepository.findById(jobId).get();
+		String skillsInString = jobPositions.getRequiredskills().stream().collect(Collectors.joining(","));
+		jobPositions.setSkillsInString(skillsInString);
 		mav.addObject("newOffer", jobPositions);
 		mav.addObject("jobTypes", JOB_TYPES);
 		return mav;

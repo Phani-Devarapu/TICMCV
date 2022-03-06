@@ -55,7 +55,10 @@
             class="btn indButton my-2 my-sm-0"
             role="button"
             th:href="@{/edit}"
-           
+            style="background-image: linear-gradient(to right, #8360c3, #2ebf91);
+
+              color: white;
+            "
           >
             Edit</a
           >
@@ -65,8 +68,10 @@
             class="btn indButton my-2 my-sm-0"
             role="button"
             th:href="@{'/view/'+${userId}}"
-          
-          >
+            style="
+              background-image: linear-gradient(to right, #fc5c7d, #6a82fb);
+              color: white;
+            ">
             View Resume</a>
            
         </div>
@@ -74,8 +79,11 @@
            <a
             class="btn indButton my-2 my-sm-0"
             role="button"
-            th:href="@{'/company/viewJobs'}"
-            
+            th:href="@{'/company/viewJobs?filter=NO'}"
+             style="
+              background-image: linear-gradient(25deg, #d64c7f, #ee4758 50%);
+              color: white;
+            "
           >
             View Jobs</a>
         </div>

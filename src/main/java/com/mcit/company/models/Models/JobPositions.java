@@ -2,6 +2,7 @@ package com.mcit.company.models.Models;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @Entity
 @Table
+@ToString
 public class JobPositions {
 
 	@Id

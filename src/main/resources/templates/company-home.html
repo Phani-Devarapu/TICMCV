@@ -59,8 +59,8 @@
             class="btn indButton"
             role="button"
             th:href="@{/company/addJobs}"
-            style="
-              background-image: linear-gradient(to right, #8e2de2, #4a00e0);
+            style="background-image: linear-gradient(to right, #8360c3, #2ebf91);
+
               color: white;
             "
           >
@@ -113,11 +113,11 @@
               </tr>
               <tr>
                 <td>Total Jobs Posted by your enterprise: <span th:text="${userId}" style="font-weight:bold"></span></td>
-                <td th:text="${metrics.openPositoins}"></td>
+                <td th:text="${metrics.totalPositionsByEnterprise}"></td>
               </tr>
               <tr>
                 <td>Open Positions in your enterprise:  <span th:text="${userId}" style="font-weight:bold"></span></td>
-                <td th:text="${metrics.openPositoins}"></td>
+                <td th:text="${metrics.openPositionsInEnterprise}"></td>
               </tr>
             </table>
            
