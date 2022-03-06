@@ -1,7 +1,7 @@
 package com.mcit.cvbuilder.user;
 
-import com.mcit.company.models.Models.CompanyProfile;
-import com.mcit.company.models.Models.JobPositions;
+import com.mcit.company.models.CompanyProfile;
+import com.mcit.company.models.JobPositions;
 import com.mcit.models.RegisterForm;
 import com.mcit.models.UserProfile;
 import org.springframework.data.jpa.repository.JpaRepository;

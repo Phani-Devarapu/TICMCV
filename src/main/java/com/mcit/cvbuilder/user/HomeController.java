@@ -5,7 +5,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 
-import com.mcit.company.models.Models.MapperClass;
+import com.mcit.company.models.MapperClass;
 import com.mcit.company.models.Repository.MappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
