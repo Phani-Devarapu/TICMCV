@@ -82,21 +82,19 @@ body {
 					<h2  th:text="${jobPosition.jobTitle}"></h2>
 					
 					
-					<div type="date" th:text="${jobPosition.companyName}" style="font-weight: 600;font-style: italic"></div>
+					<div type="text" th:text="${jobPosition.companyName}" style="font-weight: 600;font-style: italic"></div>
 					
-					<div th:text="${jobPosition.jobDescription}"></div>
+					<div type="text" th:text="${jobPosition.jobType + ' Position'}"></div>
+					
+					<div type="text" th:text="${'$ '+ jobPosition.getFormattedSalary() + ' CAD / year'}" style="font-weight: 600"></div>
 
-					<div type="date" th:text="${'$ '+ jobPosition.salary + ' CAD'}" style="font-weight: 600"></div>
+					<div type="text" th:text="${jobPosition.skillsInString}"></div>
 
-					<div type="date" th:text="${jobPosition.jobType + ' Position'}"></div>
+					<div type="text" th:text="${jobPosition.companyAddress}"></div>
 
-					<div type="date" th:text="${jobPosition.skillsInString}"></div>
+					<div type="email" th:text="${jobPosition.companyEmail}"></div>
 
-					<div type="date" th:text="${jobPosition.companyAddress}"></div>
-
-					<div type="date" th:text="${jobPosition.companyEmail}"></div>
-
-					<div type="date" th:text="${jobPosition.companyPhone}"></div>
+					<div type="number" th:text="${jobPosition.companyPhone}"></div>
 					<div
 						style="margin-top: 10px; display: flex; justify-content: space-between;">
 						<div th:if="${jobPosition.companyId}==${userId}">

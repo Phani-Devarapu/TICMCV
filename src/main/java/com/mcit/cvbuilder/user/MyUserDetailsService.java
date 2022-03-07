@@ -31,7 +31,6 @@ public class MyUserDetailsService implements UserDetailsService {
 		this.userRepository = userRepository;
 	}
 
-//	@Override
 	public User save(UserRegistrationDto registrationDTO) {
 		ArrayList<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
