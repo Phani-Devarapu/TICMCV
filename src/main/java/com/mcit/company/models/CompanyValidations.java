@@ -1,6 +1,6 @@
 package com.mcit.company.models;
 
-import com.mcit.company.models.Models.CompanyProfile;
+import com.mcit.company.models.CompanyProfile;
 import com.mcit.models.Education;
 import com.mcit.models.Job;
 import com.mcit.models.UserProfile;

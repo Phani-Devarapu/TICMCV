@@ -1,6 +1,6 @@
 package com.mcit.company.models.Repository;
 
-import com.mcit.company.models.Models.MapperClass;
+import com.mcit.company.models.MapperClass;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

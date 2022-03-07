@@ -1,6 +1,5 @@
 package com.mcit.cvbuilder.user;
 
-import com.mcit.cvbuilder.user.CustomLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -16,9 +15,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	UserDetailsService userDetailsService;
-
-	@Autowired
-	CustomLogoutHandler logoutHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -40,7 +36,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.logout()
 				.logoutUrl("/logout")
-				.addLogoutHandler(logoutHandler)
 				.logoutSuccessUrl("/");
 	}
 
