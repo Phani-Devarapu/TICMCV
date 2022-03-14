@@ -114,6 +114,50 @@
 
         margin: 0;
       }
+      .buttonClass {
+	/* background-color: #4caf50; */
+	border: none;
+	color: white;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin-right: 10px;
+
+	transition-duration: 0.4s;
+	cursor: pointer;
+	width: 120px;
+	border-radius: 10px;
+}
+      .headerButtons {
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	float: right;
+	margin-right: 30px;
+}
+.buttonOne {
+	background-color: white;
+	color: black;
+	border: 2px solid #4caf50;
+}
+
+.buttonOne:hover {
+	background-color: #4caf50;
+	color: white;
+}
+
+.buttonTwo {
+	background-color: white;
+	color: black;
+	border: 2px solid #008cba;
+}
+
+.buttonTwo:hover {
+	background-color: #008cba;
+	color: white;
+}
 
 
 
@@ -123,11 +167,15 @@
     <div>
       <div class="header">
         <a href="#">Resume portal</a>
+        <div class="headerButtons">
+          <!-- Add Functionality to Go Redirect to Home-->
+          <a href="/"> <button class="buttonClass buttonTwo">Home</button></a>
+        </div>
       </div>
     </div>
 
     <div class="mainContainer">
-      <img class="sideImg" src="./user.png" width="300px" />
+      <img class="sideImg" src="https://drive.google.com/uc?export=view&id=184UutEzor-xhR5MN8ir5LZnG_9K8oilG" width="300px" />
 
       <div class="buttonsContainer">
         <a href="/user/registerForm"><button class="button button1">Register as Individual</button></a>
