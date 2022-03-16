@@ -4,7 +4,7 @@ import java.security.Principal;
 
 import java.util.Optional;
 
-
+import com.mcit.company.models.JobPositions;
 import com.mcit.company.models.MapperClass;
 import com.mcit.company.models.Repository.MappingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mcit.models.RegisterForm;
 import com.mcit.models.User;
@@ -112,7 +113,8 @@ public class HomeController {
         userProfileRepository.save(userProfile);
         return "redirect:/login";
     }
-
+   
+	
     @GetMapping("/view/{userId}")
     public String view(Principal principal, @PathVariable String userId, Model model) {
         if (principal != null && principal.getName() != "") {
@@ -127,7 +129,7 @@ public class HomeController {
         UserProfile userProfile = userProfileOptional.get();
         model.addAttribute("userProfile", userProfile);
         System.out.println(userProfile.getJobs());
-
+      
         return "profile-templates/" + userProfile.getTheme() + "/index";
     }
 

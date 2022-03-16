@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Education Edit</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #d2d2d2;
+      }
+      .headerButtons {
+        float: right !important;
+        padding: 10px;
+      }
+      .header {
+        background-color: #e3f2fd;
+      }
+      .profileDetails {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+      .experienceContainer {
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+      .expContainer {
+        background-color: white;
+        margin-top: 20px;
+        padding: 20px;
+      }
+      .containerMain{
+        background-color: white;
+        margin-top: 20px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row header">
+        <div class="col-sm-9">
+          <h3 th:text="${userId} + '\'s Profile'">Update Education</h3>
+        </div>
+        <div class="col-sm-3 headerButtons">
+           <a class="btn btn-outline-danger" role="button" th:href="@{/edit}"
+            >Edit</a
+          >
+          <a class="btn btn-outline-danger" role="button" th:href="@{/confirmlogout}"
+            >Logout</a
+          >
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6 containerMain">
+          <div class="row">
+            <div class="col-sm-12">
+              <form action="#" th:action="@{'/edit/education?index=' + ${index}}" th:object="${education}" method="post"> 
+                <table class="col-sm-12 table table-bordered">
+                  <tr>
+                    <td >College</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{college}"
+                        placeholder="College"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Qualification</td>
+                    <td >
+                      <input
+                        class="form-control"
+                        th:field="*{qualification}"
+                        placeholder="Qualification"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >Start Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{startDate}"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >End Date</td>
+                    <td >
+                      <input
+                        type="date"
+                        class="form-control"
+                        th:field="*{endDate}"
+                      />
+                    </td>
+                  </tr>
+                  
+                   <tr>
+          <td colspan="2">
+            <p>Summary</p>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align: center;">
+           <textarea
+           class="form-control"
+           th:field="*{summary}"
+           rows="4"
+           placeholder="Summary"></textarea>
+           
+         </td>
+           <tr>
+                    <td colspan="2" style="text-align: center">
+                      <input
+                        class="btn btn-outline-success"
+                        type="submit"
+                        value="Update Education"
+                      />
+                    </td>
+                  </tr>
+               
+                </table>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

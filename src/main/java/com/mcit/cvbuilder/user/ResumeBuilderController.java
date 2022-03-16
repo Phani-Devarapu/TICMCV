@@ -1,6 +1,7 @@
 package com.mcit.cvbuilder.user;
 
 import java.security.Principal;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class ResumeBuilderController {
 
 	@GetMapping("/edit")
 	public String edit(Model model, Principal principal, @RequestParam(required = false) String add,
-			@ModelAttribute Job job, @ModelAttribute UserProfile userprofilee) {
+			@ModelAttribute Job job, @ModelAttribute Education educations, @ModelAttribute UserProfile userprofile) {
 
 		buttonClicks.setClicked(false);
 		buttonClicks.setIsaddNewEducationClicked(false);
@@ -208,8 +209,34 @@ public class ResumeBuilderController {
 		final String userId = principal.getName();
 		UserProfile userProfile = this.modifiedUserProfile.get(userId);
 		Education education = userProfile.getEducations().get(index);
+		model.addAttribute("index", index);
+		model.addAttribute("userId", userId);
 		model.addAttribute("education", education);
 		return "education-edit";
+
+	}
+
+	@PostMapping("/edit/education")
+	public String editEducation(Model model, Principal principal, @ModelAttribute Education educations, @RequestParam int index) {
+//		System.out.println("The updated education is " + educations.toString() + " " + index);
+		System.out.println("hi");
+		final String userId = principal.getName();
+		UserProfile userProfile = this.modifiedUserProfile.get(userId);
+		userProfile.getEducations().set(index, educations);
+
+		Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
+		UserProfile userProfile3 = userProfileOptional.get();
+		userProfile3.getEducations().remove(index);
+		userProfileRepository.save(userProfile3);
+
+//		job.setResponsibilities(Arrays.asList(job.getSummary().split(",")));
+
+		userProfile3.getEducations().add(educations);
+		userProfileRepository.save(userProfile3);
+
+		this.getUserDeatils(principal);
+
+		return "redirect:/edit";
 
 	}
 
